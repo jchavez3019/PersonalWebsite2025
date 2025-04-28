@@ -1,0 +1,28 @@
+<mat-toolbar color="primary" class="navbar">
+  <div class="container">
+    <a routerLink="/" class="logo">
+      <span>Jorge Chavez</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav">
+      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Home
+      </a>
+      <a mat-button routerLink="/projects" routerLinkActive="active">
+        Projects
+      </a>
+      <a mat-button routerLink="/blog" routerLinkActive="active">
+        Blog
+      </a>
+      <a mat-button routerLink="/papers" routerLinkActive="active">
+        Papers
+      </a>
+    </div>
+
+    <!-- Mobile Navigation Toggle -->
+    <button mat-icon-button class="mobile-menu-button" (click)="toggle()" aria-label="Toggle navigation menu">
+      <mat-icon>{{ sidebarVisible ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

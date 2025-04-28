@@ -1,0 +1,29 @@
+<div class="papers-container">
+  <h1>Published Papers</h1>
+  <p class="intro">
+    Here are my published academic papers and research works.
+  </p>
+
+  <div class="papers-list">
+    <mat-card class="paper-card" *ngFor="let paper of papers">
+      <mat-card-header>
+        <mat-card-title>{{ paper.title }}</mat-card-title>
+        <mat-card-subtitle>{{ paper.authors }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="journal-info">{{ paper.journal }}, {{ paper.year }}</p>
+        <p class="abstract">
+          <strong>Abstract:</strong> {{ paper.abstract }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button color="primary" [href]="paper.link" target="_blank" *ngIf="paper.link">
+          <mat-icon>description</mat-icon> Read Paper
+        </a>
+        <a mat-button color="accent" [href]="'https://doi.org/' + paper.doi" target="_blank" *ngIf="paper.doi">
+          <mat-icon>link</mat-icon> DOI
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
