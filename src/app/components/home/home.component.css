@@ -45,6 +45,12 @@
 .education-item {
   margin-bottom: 16px;
 }
+.education-item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 .featured-work {
   display: flex;
   gap: 24px;

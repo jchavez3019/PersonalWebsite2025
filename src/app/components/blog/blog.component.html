@@ -1,1 +1,17 @@
-<p>blog works!</p>
+<div class="blog-container">
+  <div class="blog-list">
+    <h2>Blog Entries</h2>
+    <mat-card *ngFor="let entry of blogEntries" class="blog-entry-card" (click)="showEntry(entry)">
+      <mat-card-header>
+        <mat-card-title>{{ entry.title }}</mat-card-title>
+        <mat-card-subtitle>{{ entry.date | date: 'mediumDate' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        {{ entry.summary }}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">Read More</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
