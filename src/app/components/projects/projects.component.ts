@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 
@@ -29,22 +29,24 @@ interface Project {
 })
 export class ProjectsComponent {
   projects: Project[] = [
-    {
-      title: 'Project One',
-      description: 'A brief description of your first project and what it accomplishes.',
-      image: 'assets/project.png',
-      technologies: ['Angular', 'TypeScript', 'Material UI'],
-      // link: 'https://project-one.example.com',
-      github: 'https://github.com/yourusername/project-one'
-    },
-    {
-      title: 'Project Two',
-      description: 'A brief description of your second project and what it accomplishes.',
-      image: 'assets/project.png',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      link: 'https://project-two.example.com',
-      github: 'https://github.com/yourusername/project-two'
-    },
+    // TODO:
+    //  The first two commented projects serve as a template on how to add more. Fill in more projects to here.
+    // {
+    //   title: 'Project One',
+    //   description: 'A brief description of your first project and what it accomplishes.',
+    //   image: 'assets/project.png',
+    //   technologies: ['Angular', 'TypeScript', 'Material UI'],
+    //   // link: 'https://project-one.example.com',
+    //   github: 'https://github.com/yourusername/project-one'
+    // },
+    // {
+    //   title: 'Project Two',
+    //   description: 'A brief description of your second project and what it accomplishes.',
+    //   image: 'assets/project.png',
+    //   technologies: ['React', 'Node.js', 'MongoDB'],
+    //   link: 'https://project-two.example.com',
+    //   github: 'https://github.com/yourusername/project-two'
+    // },
     {
       title: 'ECE 484: Principles of Safe Autonomy Lane Tracking',
       description: 'A complete vision-based solution for autonomous lane tracking. This project combined computer vision and control system techniques with an implementation deployed on the campus GEM vehicle.',
