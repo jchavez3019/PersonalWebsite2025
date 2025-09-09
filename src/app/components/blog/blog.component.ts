@@ -1,10 +1,11 @@
-import {Component, inject} from '@angular/core';
+// import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import{ CommonModule } from '@angular/common';
 import {MatCard, MatCardSubtitle, MatCardTitle, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
-import {Router} from '@angular/router';
+// import {Router} from '@angular/router';
 
-import {BlogEntryComponent} from './blog-entry/blog-entry.component';
+// import {BlogEntryComponent} from './blog-entry/blog-entry.component';
 import {BlogEntry} from './blog-entry.interface';
 
 @Component({
@@ -24,20 +25,20 @@ import {BlogEntry} from './blog-entry.interface';
 })
 export class BlogComponent {
   blogEntries: BlogEntry[] = [
-    {
-      title: "First Blog Post",
-      summary: "Brief description of first blog post.",
-      date: new Date('2025-04-27'),
-      path: 'assets/articles/firstBlogEntryExample.md'
-    }
+    // {
+    //   title: "First Blog Post",
+    //   summary: "Brief description of first blog post.",
+    //   date: new Date('2025-04-27'),
+    //   path: 'assets/articles/firstBlogEntryExample.md'
+    // }
   ];
 
   // Inject services
-  private readonly router: Router = inject(Router);
+  // private readonly router: Router = inject(Router);
 
-  showEntry(entry: BlogEntry) {
-    const encodedPath = encodeURIComponent(entry.path);
-    this.router.navigate(['/blog/entry'], { queryParams: { path: encodedPath } });
-  }
+  // showEntry(entry: BlogEntry) {
+  //   const encodedPath = encodeURIComponent(entry.path);
+  //   this.router.navigate(['/blog/entry'], { queryParams: { path: encodedPath } });
+  // }
 
 }
