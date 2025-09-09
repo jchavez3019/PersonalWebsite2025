@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import{ CommonModule } from '@angular/common';
 import {MatCard, MatCardSubtitle, MatCardTitle, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
@@ -32,7 +32,8 @@ export class BlogComponent {
     }
   ];
 
-  constructor(private router: Router) { }
+  // Inject services
+  private readonly router: Router = inject(Router);
 
   showEntry(entry: BlogEntry) {
     const encodedPath = encodeURIComponent(entry.path);

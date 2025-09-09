@@ -5,7 +5,7 @@ import {
   ElementRef,
   ViewContainerRef,
   Injector,
-  Type
+  Type, inject
 } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { marked } from 'marked';
@@ -31,19 +31,18 @@ export class BlogEntryComponent implements AfterViewInit {
 
   mdPath!: string;
 
+  // Injected services
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  private readonly router: Router = inject(Router);
+  private readonly http: HttpClient = inject(HttpClient);
+  private readonly injector: Injector = inject(Injector);
+  private readonly mathjax: MathjaxService = inject(MathjaxService);
+
   private componentRegistry: Record<string, ComponentLoader> = {
     'app-first-entry-chart-example': () =>
       import('../blog-widgets/first-entry-chart-example/first-entry-chart-example.component')
         .then(m => m.FirstEntryChartExampleComponent)
   };
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient,
-    private injector: Injector,
-    private mathjax: MathjaxService
-  ) {}
 
   async ngAfterViewInit() {
     const path = this.route.snapshot.queryParamMap.get('path');
@@ -96,10 +95,9 @@ export class BlogEntryComponent implements AfterViewInit {
 
   private transferAttributesToComponent(el: HTMLElement, instance: any) {
     if (!el.attributes) return;
-    for (let i = 0; i < el.attributes.length; i++) {
-      const attr = el.attributes[i];
+    for (const attr of el.attributes) {
       const name = this.kebabToCamel(attr.name);
-      let value: any = attr.value;
+      let value: string | boolean | number = attr.value;
 
       if (value === 'true') value = true;
       else if (value === 'false') value = false;

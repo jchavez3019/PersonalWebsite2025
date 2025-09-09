@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   title = 'PersonalWebsite';
   sidebarVisible = false;
 
-  constructor(private navbarService: NavbarService) {}
+  private readonly navbarService: NavbarService = inject(NavbarService);
 
   ngOnInit() {
     this.navbarService.sidebarState$.subscribe(state => {

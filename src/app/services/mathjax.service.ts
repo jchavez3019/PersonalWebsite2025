@@ -34,10 +34,11 @@ import { CHTML } from 'mathjax-full/js/output/chtml.js';
 import { browserAdaptor } from 'mathjax-full/js/adaptors/browserAdaptor.js';
 import { RegisterHTMLHandler } from 'mathjax-full/js/handlers/html.js';
 import { AllPackages } from 'mathjax-full/js/input/tex/AllPackages.js';
+import {MathDocument} from 'mathjax-full/js/core/MathDocument';
 
 @Injectable({ providedIn: 'root' })
 export class MathjaxService {
-  private doc: any;
+  private doc: MathDocument<any, any, any>;
 
   constructor() {
     const adaptor = browserAdaptor();
