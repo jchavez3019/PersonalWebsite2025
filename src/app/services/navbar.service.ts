@@ -1,6 +1,5 @@
-import {inject, Injectable} from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root' // let this service be available globally
@@ -9,17 +8,25 @@ export class NavbarService {
   private sidebarState = new BehaviorSubject<boolean>(false);
   sidebarState$ = this.sidebarState.asObservable();
 
-  // Inject services
-  private readonly router: Router = inject(Router);
+  private currentHomeContent = new BehaviorSubject<string>("home");
+  currentHomeContent$ = this.currentHomeContent.asObservable();
 
-  constructor() {
+  tabOptions = new Set([
+    'home', 'projects', 'blog', 'papers',
+  ]);
 
-    // Subscribe the router events to close the side-bar on navigation
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.closeSidebar();
-      }
-    });
+  navigateTab(tab: string) {
+    // Tab to navigate towards does not exist in our options
+    if (!this.tabOptions.has(tab)) {
+      console.error(`Tab ${tab} not found`);
+      return;
+    }
+
+    // Close the sidebar upon navigation
+    this.closeSidebar();
+    // Emit the new tab (potentially repeated) tab
+    this.currentHomeContent.next(tab);
+    return;
   }
 
   toggleSidebar() {

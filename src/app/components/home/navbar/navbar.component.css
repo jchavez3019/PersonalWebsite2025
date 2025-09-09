@@ -32,7 +32,7 @@
   display: flex;
 }
 
-.desktop-nav a {
+.desktop-nav button {
   height: 64px;
   line-height: 64px;
   padding: 0 16px;
@@ -41,7 +41,7 @@
   transition: background-color 0.3s ease;
 }
 
-.desktop-nav a.active::after {
+.desktop-nav button.active::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -51,7 +51,7 @@
   background-color: white;
 }
 
-.desktop-nav a:hover {
+.desktop-nav button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
