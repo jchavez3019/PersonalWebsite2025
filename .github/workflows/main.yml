@@ -38,5 +38,5 @@ jobs:
 
       # Sync build output to S3
       - name: Deploy to S3
-        run: aws s3 sync ./dist/ s3://www.jorgechavezuiuc.com --delete
+        run: aws s3 sync ./dist/updated-personal-website/browser s3://www.jorgechavezuiuc.com --delete
         
