@@ -1,11 +1,7 @@
-// import {Component, inject} from '@angular/core';
 import {Component} from '@angular/core';
 import{ CommonModule } from '@angular/common';
 import {MatCard, MatCardSubtitle, MatCardTitle, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
-// import {Router} from '@angular/router';
-
-// import {BlogEntryComponent} from './blog-entry/blog-entry.component';
 import {BlogEntry} from './blog-entry.interface';
 
 @Component({
