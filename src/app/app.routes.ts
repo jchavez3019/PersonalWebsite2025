@@ -1,6 +1,7 @@
 /* generated components */
 import { Routes } from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
+import {PdfViewerComponent} from './components/pdf-viewer/pdf-viewer.component';
 // import {BlogEntryComponent} from './components/blog/blog-entry/blog-entry.component';
 
 /*
@@ -19,5 +20,6 @@ import {HomeComponent} from './components/home/home.component';
 export const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   // // { path: 'blog/entry', component: BlogEntryComponent },
-  {path: '**', redirectTo: ''}
+  { path: 'pdf-viewer/:filename', component: PdfViewerComponent },
+  {path: '**', redirectTo: ''},
 ];

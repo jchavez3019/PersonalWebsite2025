@@ -13,4 +13,5 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class FooterComponent {
   currentYear = new Date().getFullYear();
+  todaysDate = new Date();
 }
