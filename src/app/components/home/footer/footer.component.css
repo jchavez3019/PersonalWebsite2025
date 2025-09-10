@@ -13,8 +13,10 @@
   align-items: center;
 }
 .social-links {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  align-items: center;
 }
 .social-link {
   color: white;

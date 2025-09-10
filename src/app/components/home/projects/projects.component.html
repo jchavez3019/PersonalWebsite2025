@@ -25,7 +25,7 @@
         <a mat-button color="primary" [href]="project.video" target="_blank" *ngIf="project.video">
           <mat-icon>movie</mat-icon> View Video
         </a>
-        <a mat-button color="primary" [href]="project.pdf" target="_blank" *ngIf="project.pdf">
+        <a mat-button color="primary" [routerLink]="['/pdf-viewer', project.pdf]" routerLinkActive="active" *ngIf="project.pdf">
           <mat-icon>picture_as_pdf</mat-icon> View Report
         </a>
         <a mat-button color="accent" [href]="project.github" target="_blank" *ngIf="project.github">

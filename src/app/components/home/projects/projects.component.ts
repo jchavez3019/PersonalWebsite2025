@@ -3,6 +3,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {MatAnchor} from '@angular/material/button';
 
 
 interface Project {
@@ -23,6 +25,9 @@ interface Project {
     MatIconModule,
     MatCardModule,
     MatChipsModule,
+    RouterLink,
+    RouterLinkActive,
+    MatAnchor,
   ],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
