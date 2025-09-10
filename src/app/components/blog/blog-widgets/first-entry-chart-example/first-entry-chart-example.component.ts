@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import {Component, Input, OnInit, ElementRef, inject} from '@angular/core';
 
 @Component({
   selector: 'app-first-entry-chart-example',
@@ -7,10 +7,11 @@ import { Component, Input, OnInit, ElementRef } from '@angular/core';
   styleUrl: './first-entry-chart-example.component.css'
 })
 export class FirstEntryChartExampleComponent implements OnInit {
-  @Input() title: string = 'Example Chart';
-  @Input() data: any = { n: 50, color: 'steelblue' };
+  @Input() title = 'Example Chart';
+  @Input() data = { n: 50, color: 'steelblue' };
 
-  constructor(private el: ElementRef) {}
+  // Inject services
+  private readonly el: ElementRef = inject(ElementRef);
 
   ngOnInit(): void {
     // sample: draw on canvas or initialize d3 chart using this.data

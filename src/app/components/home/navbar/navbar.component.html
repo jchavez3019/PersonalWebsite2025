@@ -1,24 +1,24 @@
 <mat-toolbar color="primary" class="navbar">
   <div class="container">
-    <a routerLink="/" class="logo">
+    <button mat-button class="logo" (click)="navigateTab('home')">
       <span>Jorge Chavez</span>
-    </a>
+    </button>
 
     <!-- Desktop Navigation -->
     <div class="desktop-nav">
-      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <button mat-button (click)="navigateTab('home')">
         Home
-      </a>
-      <a mat-button routerLink="/projects" routerLinkActive="active">
+      </button>
+      <button mat-button (click)="navigateTab('projects')">
         Projects
-      </a>
+      </button>
 <!--      TODO: Bring this back once the blog section is completed. -->
 <!--      <a mat-button routerLink="/blog" routerLinkActive="active">-->
 <!--        Blog-->
 <!--      </a>-->
-      <a mat-button routerLink="/papers" routerLinkActive="active">
+      <button mat-button (click)="navigateTab('papers')">
         Papers
-      </a>
+      </button>
     </div>
 
     <!-- Mobile Navigation Toggle -->

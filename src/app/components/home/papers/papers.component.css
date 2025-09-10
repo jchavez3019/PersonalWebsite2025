@@ -1,0 +1,48 @@
+.papers-container {
+  max-width: 100%;
+}
+.intro {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+.papers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.paper-card {
+  background: linear-gradient(145deg, rgba(30, 30, 60, 0.7), rgba(20, 20, 40, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 100%;
+}
+.journal-info {
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.abstract {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.3;
+  text-align: justify;
+}
+
+.show-string:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.author-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.contrib-note {
+  /* Takes up only the space it needs */
+  font-size: 0.9em;
+  font-style: italic;
+  color: #666;
+}

@@ -1,12 +1,11 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {RouterLink, RouterLinkActive} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 /* services */
-import { NavbarService} from '../../services/navbar.service';
+import { NavbarService} from '../../../services/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,17 +14,15 @@ import { NavbarService} from '../../services/navbar.service';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
-    RouterLinkActive,
-    RouterLink,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  // isDrawerOpen = false;
   sidebarVisible = false;
 
-  constructor(private navbarService: NavbarService) {}
+  // Inject services
+  private readonly navbarService: NavbarService = inject(NavbarService);
 
   ngOnInit() {
     this.navbarService.sidebarState$.subscribe(state => {
@@ -41,5 +38,9 @@ export class NavbarComponent implements OnInit {
 
   toggle() {
     this.navbarService.toggleSidebar();
+  }
+
+  navigateTab(tab: string) {
+    this.navbarService.navigateTab(tab);
   }
 }

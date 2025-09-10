@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Setup Node.js 
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Build Angular app 
+      # Build Angular app
       - name: Build Angular App
         run: npm run build -- --configuration production
 
@@ -34,7 +34,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  # my bucket's region
+          aws-region: ${{ env.AWS_REGION }}  # my bucket's region
 
       # Sync build output to S3
       # Delete old files
@@ -45,4 +45,4 @@ jobs:
       # Create CloudFront invalidation to serve the new files in the bucket
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-        
+

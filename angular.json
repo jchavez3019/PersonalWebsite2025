@@ -31,8 +31,7 @@
               "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -92,11 +91,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "a2308acb-ef51-44f9-ad97-3c2e05917f88"
+    "analytics": "a2308acb-ef51-44f9-ad97-3c2e05917f88",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }
