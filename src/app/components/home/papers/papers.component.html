@@ -5,17 +5,55 @@
   </p>
 
   <div class="papers-list">
-    <mat-card class="paper-card" *ngFor="let paper of papers">
+    <mat-card class="paper-card" *ngFor="let paper of papers, let i = index">
+
       <mat-card-header>
-        <mat-card-title>{{ paper.title }}</mat-card-title>
-        <mat-card-subtitle>{{ paper.authors }}</mat-card-subtitle>
+        <mat-card-title>
+          <h2>{{ paper.title }}</h2>
+        </mat-card-title>
+        <mat-card-subtitle class="author-container">
+          <!-- List of authors with formatting -->
+          <div class="author-list">
+            <ng-container *ngFor="let author of paper.authors; let last = last">
+
+              <!-- If the author has an associated url, attach it. Otherwise, display their name as plain text. -->
+              <ng-container *ngIf="author.url; else plainName">
+                <a [href]="author.url" target="_blank">{{ author.name }}</a>
+              </ng-container>
+              <ng-template #plainName>{{ author.name }}</ng-template>
+
+              <!-- Superscript star if the author contributed equally -->
+              <sup *ngIf="author.contribution === 'equal'">*</sup>
+              <!-- Separate authors by comma unless this is the last author -->
+              <span *ngIf="!last">, </span>
+            </ng-container>
+          </div>
+
+          <!-- footnote if any equal contribution -->
+          <div *ngIf="hasEqualContributors(i)" class="contrib-note">
+            * Authors contributed equally
+          </div>
+        </mat-card-subtitle>
       </mat-card-header>
+
       <mat-card-content>
         <p class="journal-info">{{ paper.journal }}, {{ paper.year }}</p>
         <p class="abstract">
-          <strong>Abstract:</strong> {{ paper.abstract }}
+          <strong>Abstract:</strong>
+          {{ isExpanded(i) ? paper.abstract : getTruncatedAbstract(paper.abstract) }}
+          <span
+            *ngIf="paper.abstract.length > 200"
+            class="expand-toggle"
+            (click)="toggleAbstract(i)"
+            (keyup.enter)="toggleAbstract(i)"
+            (keyup.space)="toggleAbstract(i)"
+            tabindex="0"
+          >
+            <strong class="show-string">{{ isExpanded(i) ? ' Read less' : ' Read more' }}</strong>
+          </span>
         </p>
       </mat-card-content>
+
       <mat-card-actions>
         <a mat-button color="primary" [href]="paper.link" target="_blank" *ngIf="paper.link">
           <mat-icon>description</mat-icon> Read Paper

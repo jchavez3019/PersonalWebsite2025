@@ -6,7 +6,11 @@ import {MatAnchor} from '@angular/material/button';
 
 interface Paper {
   title: string;
-  authors: string;
+  authors: {
+    name: string;
+    url: string;
+    contribution: 'equal' | '';
+  }[];
   journal: string;
   year: number;
   abstract: string;
@@ -30,7 +34,33 @@ export class PapersComponent {
     {
       title: "Guaranteed Bounding Meshes Extraction from Neural " +
         "Implicit Surfaces via Neural Network Verification",
-      authors: "Jorge Chavez*, Ruize Gao*, Xiangru Zhong*, Huan Zhang, Shenlong Wang",
+      authors: [
+        {
+          name: 'Jorge Chavez',
+          url: 'https://www.jorgechavezuiuc.com/',
+          contribution: 'equal',
+        },
+        {
+          name: 'Ruize Gao',
+          url: 'https://www.linkedin.com/in/ruize-gao-199b0b18b/',
+          contribution: 'equal',
+        },
+        {
+          name: 'Xiangru Zhong',
+          url: 'https://scholar.google.com/citations?user=ltuTQBIAAAAJ&hl=zh-CN',
+          contribution: 'equal',
+        },
+        {
+          name: 'Huan Zhang',
+          url: 'https://www.huan-zhang.com/',
+          contribution: '',
+        },
+        {
+          name: 'Shenlong Wang',
+          url: 'https://shenlong.web.illinois.edu/',
+          contribution: '',
+        }
+      ],
       journal: "International Conference on Learning Representations (ICLR) [Under Review]",
       year: 2025,
       abstract: "Geometric queries on neural implicit surfaces can be converted to neural verification\n" +
@@ -55,8 +85,34 @@ export class PapersComponent {
     },
     {
       title: "Clip-and-Verify: Linear Constraint-Driven Domain Clipping for Accelerating Neural Network Verification",
-      authors: "Jorge Chavez*, Duo Zhou*, Hesun Chen*, Huan Zhang, Grani Adiwena Hanasusanto",
-      journal: "Conference on Neural Information Processing Systems (NeurIPS) [under review]",
+      authors: [
+        {
+          name: 'Jorge Chavez',
+          url: 'https://www.jorgechavezuiuc.com/',
+          contribution: 'equal',
+        },
+        {
+          name: 'Duo Zhou',
+          url: 'https://www.duo-zhou.com/',
+          contribution: 'equal',
+        },
+        {
+          name: 'Hesun Chen',
+          url: 'https://www.linkedin.com/in/hesun-chen-495b7633b',
+          contribution: 'equal',
+        },
+        {
+          name: 'Huan Zhang',
+          url: 'https://www.huan-zhang.com/',
+          contribution: '',
+        },
+        {
+          name: 'Grani Adiwena Hanasusanto',
+          url: 'http://grani.hanasusanto.com/',
+          contribution: '',
+        },
+      ],
+      journal: "Conference on Neural Information Processing Systems (NeurIPS) [Under Review]",
       year: 2025,
       abstract: "State-of-the-art neural network verifiers demonstrate that applying the branch-and-\n" +
         "bound (BaB) procedure with fast bounding techniques plays a key role in tackling\n" +
@@ -81,7 +137,13 @@ export class PapersComponent {
     },
     {
       title: "A Linear Constraint Driven Approach to Efficiently Enhancing Branch and Bound in Neural Network Verification",
-      authors: "Jorge Chavez",
+      authors: [
+        {
+          name: 'Jorge Chavez',
+          url: 'https://www.jorgechavezuiuc.com/',
+          contribution: '',
+        },
+      ],
       journal: "Master’s Thesis, Graduate College of the University of Illinois Urbana-Champaign",
       year: 2025,
       abstract: "The verification of neural network systems is crucial as the adoption of these systems are considered for\n" +
@@ -97,4 +159,47 @@ export class PapersComponent {
     },
     // Add more papers as needed
   ];
+
+  // Contains the indices of papers whose abstract should be expanded.
+  expandedAbstracts: Set<number> = new Set<number>();
+
+  /**
+   * Toggles whether a paper's abstract should be expanded or not.
+   * @param index -- Integer index into the list of papers.
+   */
+  toggleAbstract(index: number) {
+    if (this.expandedAbstracts.has(index)) {
+      this.expandedAbstracts.delete(index);
+    } else {
+      this.expandedAbstracts.add(index);
+    }
+  }
+
+  /**
+   * Returns boolean of whether a paper has its abstract expanded.
+   * @param index -- Integer index into the list of papers.
+   */
+  isExpanded(index: number): boolean {
+    return this.expandedAbstracts.has(index);
+  }
+
+  /**
+   * Truncates a paper's abstract if it should be truncated.
+   * @param text  -- Abstract text.
+   * @param limit -- Character limit to truncate towards.
+   */
+  getTruncatedAbstract(text: string, limit = 350): string {
+    if (text.length <= limit) return text;
+    return text.slice(0, limit) + '...';
+  }
+
+  /**
+   * Returns whether the equal contribution tag needs to be inserted for a paper.
+   * @param index -- Integer index into the list of papers.
+   */
+  hasEqualContributors(index: number): boolean {
+    return this.papers[index].authors.some((author: {name: string, url: string, contribution: string}) => {
+      return author.contribution === 'equal';
+    });
+  }
 }
