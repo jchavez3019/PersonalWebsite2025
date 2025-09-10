@@ -63,24 +63,24 @@ export class PapersComponent {
       ],
       journal: "International Conference on Learning Representations (ICLR) [Under Review]",
       year: 2025,
-      abstract: "Geometric queries on neural implicit surfaces can be converted to neural verification\n" +
-        "problems that seek to prove certain properties of the queried neural implicit. State-\n" +
-        "of-the-art neural verification tools are capable of providing refined solutions to such\n" +
-        "problems through complex behaviors and at a high computational costs, but we find\n" +
-        "that a handful of linear bound propagation verifiers can be adapted to solve them\n" +
-        "in real-time, such as rendering and physics simulation. Instead of running neural\n" +
-        "verifiers on the fly, we can classify a 3D input domain into multiple regions of\n" +
-        "interest, which can assist in subsequent verifications. We achieve this objective by\n" +
-        "constructing explicit bounding volumes. Fortunately, tight linear bounds generated\n" +
-        "by SOTA neural network verifiers can be leveraged to guide the generation of\n" +
-        "piecewise linear meshes. In this paper, we propose Guaranteed Inner-and-Outer\n" +
-        "Meshes (GIOM), which can serve as bounding volumes and merge seamlessly with\n" +
-        "existing explicit geometry processors to accelerate queries on neural implicits. As\n" +
-        "tight and sound bounding meshes, GIOM enables accelerated neural SDF queries\n" +
-        "without sacrificing quality. With GIOM, we develop accelerated neural implicit\n" +
-        "ray casting, collision detection, and constructive solid geometry methods (CSG),\n" +
-        "achieving up to a 300% speedup in real-time rendering, a 500% speedup in physics\n" +
-        "simulation, and an optimization-free neural CSG procedure. Experiments show that\n" +
+      abstract: "Geometric queries on neural implicit surfaces can be converted to neural verification " +
+        "problems that seek to prove certain properties of the queried neural implicit. State-" +
+        "of-the-art neural verification tools are capable of providing refined solutions to such " +
+        "problems through complex behaviors and at a high computational costs, but we find " +
+        "that a handful of linear bound propagation verifiers can be adapted to solve them " +
+        "in real-time, such as rendering and physics simulation. Instead of running neural " +
+        "verifiers on the fly, we can classify a 3D input domain into multiple regions of " +
+        "interest, which can assist in subsequent verifications. We achieve this objective by " +
+        "constructing explicit bounding volumes. Fortunately, tight linear bounds generated " +
+        "by SOTA neural network verifiers can be leveraged to guide the generation of " +
+        "piecewise linear meshes. In this paper, we propose Guaranteed Inner-and-Outer " +
+        "Meshes (GIOM), which can serve as bounding volumes and merge seamlessly with " +
+        "existing explicit geometry processors to accelerate queries on neural implicits. As " +
+        "tight and sound bounding meshes, GIOM enables accelerated neural SDF queries " +
+        "without sacrificing quality. With GIOM, we develop accelerated neural implicit " +
+        "ray casting, collision detection, and constructive solid geometry methods (CSG), " +
+        "achieving up to a 300% speedup in real-time rendering, a 500% speedup in physics " +
+        "simulation, and an optimization-free neural CSG procedure. Experiments show that " +
         "GIOS significantly outperforms existing methods in the speed–quality trade-off.",
     },
     {
@@ -114,25 +114,25 @@ export class PapersComponent {
       ],
       journal: "Conference on Neural Information Processing Systems (NeurIPS) [Under Review]",
       year: 2025,
-      abstract: "State-of-the-art neural network verifiers demonstrate that applying the branch-and-\n" +
-        "bound (BaB) procedure with fast bounding techniques plays a key role in tackling\n" +
-        "many challenging verification properties. In this work, we introduce the linear\n" +
-        "constraint-driven clipping framework, a class of scalable and efficient methods\n" +
-        "to enhance bound propagation verifiers. Under this framework, we develop two\n" +
-        "novel algorithms that efficiently utilize linear constraints to 1) reduce portions of\n" +
-        "the input space that are either verified or irrelevant to a subproblem in the context\n" +
-        "of branch-and-bound, and 2) directly improve intermediate bounds throughout\n" +
-        "the network. The process novelly uses linear constraints that are readily available\n" +
-        "during verification but not fully utilized in prior work. It efficiently handles linear\n" +
-        "constraints using a specialized procedure that can scale to large neural networks\n" +
-        "that the latest verifiers can handle without using any expensive external solvers.\n" +
-        "Our verification algorithm, Clip-and-Verify, tightens bounds globally and can\n" +
-        "significantly reduce the number of subproblems handled during BaB. We show\n" +
-        "our clipping procedures can intuitively and efficiently be incorporated into BaB-\n" +
-        "based verifiers such as α,β-CROWN, and is amenable to BaB procedures that\n" +
-        "split upon the input or activation space. We demonstrate the effectiveness of our\n" +
-        "procedure on a broad range of benchmarks where, in some instances, we witness a\n" +
-        "96% reduction in the number of subproblems during branch-and-bound, and also\n" +
+      abstract: "State-of-the-art neural network verifiers demonstrate that applying the branch-and-" +
+        "bound (BaB) procedure with fast bounding techniques plays a key role in tackling " +
+        "many challenging verification properties. In this work, we introduce the linear " +
+        "constraint-driven clipping framework, a class of scalable and efficient methods " +
+        "to enhance bound propagation verifiers. Under this framework, we develop two " +
+        "novel algorithms that efficiently utilize linear constraints to 1) reduce portions of " +
+        "the input space that are either verified or irrelevant to a subproblem in the context " +
+        "of branch-and-bound, and 2) directly improve intermediate bounds throughout " +
+        "the network. The process novelly uses linear constraints that are readily available " +
+        "during verification but not fully utilized in prior work. It efficiently handles linear " +
+        "constraints using a specialized procedure that can scale to large neural networks " +
+        "that the latest verifiers can handle without using any expensive external solvers. " +
+        "Our verification algorithm, Clip-and-Verify, tightens bounds globally and can " +
+        "significantly reduce the number of subproblems handled during BaB. We show " +
+        "our clipping procedures can intuitively and efficiently be incorporated into BaB-" +
+        "based verifiers such as α,β-CROWN, and is amenable to BaB procedures that " +
+        "split upon the input or activation space. We demonstrate the effectiveness of our " +
+        "procedure on a broad range of benchmarks where, in some instances, we witness a " +
+        "96% reduction in the number of subproblems during branch-and-bound, and also " +
         "achieve state-of-the-art verified accuracy across multiple benchmarks.",
     },
     {
@@ -146,15 +146,15 @@ export class PapersComponent {
       ],
       journal: "Master’s Thesis, Graduate College of the University of Illinois Urbana-Champaign",
       year: 2025,
-      abstract: "The verification of neural network systems is crucial as the adoption of these systems are considered for\n" +
-        "safety-critical tasks. A neural network system that works empirically well may not be robust, and when\n" +
-        "employed in areas such as cyber-security and cyber-physical systems, the guaranteed performance is a\n" +
-        "must. Formal verification is a rapidly growing field that delves into providing these guarantees, ensuring\n" +
-        "that properties on these networks can be assured. This thesis serves as an introduction into the common\n" +
-        "techniques used to provide such guarantees. There is a particular focus on bound propagation techniques as\n" +
-        "such techniques have fueled state-of-the-art, efficient verifiers. After covering the many advances that have\n" +
-        "been made in neural network verification, we will delve further into the branch-and-bound paradigm that\n" +
-        "typically accompanies many existing verifiers, as well as demonstrate an insightful algorithm that is capable\n" +
+      abstract: "The verification of neural network systems is crucial as the adoption of these systems are considered for " +
+        "safety-critical tasks. A neural network system that works empirically well may not be robust, and when " +
+        "employed in areas such as cyber-security and cyber-physical systems, the guaranteed performance is a " +
+        "must. Formal verification is a rapidly growing field that delves into providing these guarantees, ensuring " +
+        "that properties on these networks can be assured. This thesis serves as an introduction into the common " +
+        "techniques used to provide such guarantees. There is a particular focus on bound propagation techniques as " +
+        "such techniques have fueled state-of-the-art, efficient verifiers. After covering the many advances that have " +
+        "been made in neural network verification, we will delve further into the branch-and-bound paradigm that " +
+        "typically accompanies many existing verifiers, as well as demonstrate an insightful algorithm that is capable " +
         "of garnering further efficacy from bound propagation verifiers.",
     },
     // Add more papers as needed
