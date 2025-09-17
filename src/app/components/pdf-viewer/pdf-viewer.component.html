@@ -1,3 +1,5 @@
 <main class="main">
-  <iframe [src]="safeUrl"></iframe>
+  <!--  Wrapping binding in an *ngIf so Angular doesn’t try to render the URL until it’s actually set. This is to help
+        prevent XSS attacks. -->
+  <iframe *ngIf="safeUrl" [src]="safeUrl"></iframe>
 </main>

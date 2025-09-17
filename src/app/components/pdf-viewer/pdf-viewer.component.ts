@@ -1,10 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-pdf-viewer',
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './pdf-viewer.component.html',
   styleUrl: './pdf-viewer.component.css'
 })
