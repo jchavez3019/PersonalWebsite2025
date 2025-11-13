@@ -19,16 +19,16 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-button color="primary" [href]="project.link" target="_blank" *ngIf="project.link">
+        <a class="project-link" mat-button color="primary" [href]="project.link" target="_blank" *ngIf="project.link">
           <mat-icon>open_in_new</mat-icon> View Project
         </a>
-        <a mat-button color="primary" [href]="project.video" target="_blank" *ngIf="project.video">
+        <a class="project-video" mat-button color="primary" [href]="project.video" target="_blank" *ngIf="project.video">
           <mat-icon>movie</mat-icon> View Video
         </a>
-        <a mat-button color="primary" [routerLink]="['/pdf-viewer', project.pdf]" routerLinkActive="active" *ngIf="project.pdf">
+        <a class="project-pdf" mat-button color="primary" [routerLink]="['/pdf-viewer', project.pdf]" routerLinkActive="active" *ngIf="project.pdf">
           <mat-icon>picture_as_pdf</mat-icon> View Report
         </a>
-        <a mat-button color="accent" [href]="project.github" target="_blank" *ngIf="project.github">
+        <a class="project-github" mat-button color="accent" [href]="project.github" target="_blank" *ngIf="project.github">
           <mat-icon>code</mat-icon> View Code
         </a>
       </mat-card-actions>

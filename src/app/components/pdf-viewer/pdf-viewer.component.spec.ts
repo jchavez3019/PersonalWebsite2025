@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PdfViewerComponent } from './pdf-viewer.component';
+import {provideRouter} from '@angular/router';
 
 describe('PdfViewerComponent', () => {
   let component: PdfViewerComponent;
@@ -8,7 +8,8 @@ describe('PdfViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PdfViewerComponent]
+      imports: [PdfViewerComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 
