@@ -58,7 +58,7 @@ export class ProjectsComponent {
       image: 'assets/GEM-isometric.jpg',
       technologies: ['Vue.js', 'Firebase', 'TailwindCSS'],
       video: 'https://youtu.be/Zc9iKM_Oca8?si=rgICaBTXz6osFEx8',
-      github: 'https://github.com/yourusername/project-three'
+      github: 'https://github.com/jchavez3019/ECE484FinalProject'
     },
     {
       title: 'Photo Cluster: Automated Face Recognition',
@@ -66,7 +66,7 @@ export class ProjectsComponent {
       image: 'assets/CS549PhotoClusterCover.png',
       technologies: ['Python', 'PyTorch'],
       pdf: './assets/project_pdfs/CS 549 Final Project Report.pdf',
-      github: 'https://github.com/yourusername/project-three'
+      github: 'https://github.com/jchavez3019/ECE549FinalProject'
     }
     // Add more projects as needed
   ];

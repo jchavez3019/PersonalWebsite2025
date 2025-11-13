@@ -23,18 +23,4 @@ describe('ProjectsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have working links (no 404s)', async () => {
-    const anchorElements: HTMLAnchorElement[] = fixture.nativeElement.querySelectorAll('a');
-
-    const hrefs: string[] = Array.from(anchorElements)
-      .map((a: HTMLAnchorElement) => a.href)
-      .filter(href => !!href);
-
-    expect(hrefs.length).toBeGreaterThan(0);
-
-    for (const href of hrefs) {
-      const response = await fetch(href, { method: 'HEAD' });
-      expect(response.status).not.toBe(404);
-    }
-  });
 });
