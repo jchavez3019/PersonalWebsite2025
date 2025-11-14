@@ -18,20 +18,28 @@
 
               <!-- If the author has an associated url, attach it. Otherwise, display their name as plain text. -->
               <ng-container *ngIf="author.url; else plainName">
-                <a [href]="author.url" target="_blank">{{ author.name }}</a>
+                <a [href]="author.url" target="_blank">
+                  <span [ngClass]="{'bold-author': author.embolden}">
+                    {{ author.name }}
+                  </span>
+                </a>
               </ng-container>
-              <ng-template #plainName>{{ author.name }}</ng-template>
+              <ng-template #plainName>
+                <span [ngClass]="{'bold-author': author.embolden}">
+                  {{ author.name }}
+                </span>
+              </ng-template>
 
               <!-- Superscript star if the author contributed equally -->
-              <sup *ngIf="author.contribution === 'equal'">*</sup>
+              <sup *ngIf="author.asterisk && !!getContributionNote(i)">*</sup>
               <!-- Separate authors by comma unless this is the last author -->
               <span *ngIf="!last">, </span>
             </ng-container>
           </div>
 
           <!-- footnote if any equal contribution -->
-          <div *ngIf="hasEqualContributors(i)" class="contrib-note">
-            * Authors contributed equally
+          <div *ngIf="getContributionNote(i) as note" class="contrib-note">
+            {{ note }}
           </div>
         </mat-card-subtitle>
       </mat-card-header>

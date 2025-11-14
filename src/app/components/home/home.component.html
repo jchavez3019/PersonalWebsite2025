@@ -2,24 +2,28 @@
 
   <div class="app-container">
 
-    <!-- Angular Material Drawer -->
+
     <mat-drawer-container class="drawer-container">
+      <!-- Angular Material Drawer that opens from the right-side to allow the user to navigate to different pages
+     on mobile devices. This drawer is toggled by a button on the navigation bar that is only visible when the
+     viewport is below some threshold. -->
       <mat-drawer mode="over" position="end" class="sidenav-drawer"
                   [opened]="sidebarVisible">
         <div class="drawer-content">
-          <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">
+          <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar('home')">
             <mat-icon>home</mat-icon>
             <span>Home</span>
           </a>
-          <a mat-button routerLink="/projects" routerLinkActive="active" (click)="closeSidebar()">
+          <a mat-button routerLink="/projects" routerLinkActive="active" (click)="closeSidebar('projects')">
             <mat-icon>code</mat-icon>
             <span>Projects</span>
           </a>
-          <a mat-button routerLink="/blog" routerLinkActive="active" (click)="closeSidebar()">
-            <mat-icon>book</mat-icon>
-            <span>Blog</span>
-          </a>
-          <a mat-button routerLink="/papers" routerLinkActive="active" (click)="closeSidebar()">
+<!--          FIXME: Bring this section back later. -->
+<!--          <a mat-button routerLink="/blog" routerLinkActive="active" (click)="closeSidebar('blog')">-->
+<!--            <mat-icon>book</mat-icon>-->
+<!--            <span>Blog</span>-->
+<!--          </a>-->
+          <a mat-button routerLink="/papers" routerLinkActive="active" (click)="closeSidebar('papers')">
             <mat-icon>article</mat-icon>
             <span>Papers</span>
           </a>

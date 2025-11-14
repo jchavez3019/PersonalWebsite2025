@@ -4,6 +4,13 @@
       <span>Jorge Chavez</span>
     </button>
 
+<!--
+The navigation bar will always appear at the top of the web application. In a desktop configuration, this
+navigation bar will be filled with buttons that allow the user to navigate between different pages. However,
+when the web application is viewed on a small device such as a phone, we hide these buttons and instead display
+a single drawer button. This button can be toggled by the user to open and close an Angular Material Drawer that exists
+in the `home.component.html` code.
+-->
     <!-- Desktop Navigation -->
     <div class="desktop-nav">
       <button mat-button (click)="navigateTab('home')">

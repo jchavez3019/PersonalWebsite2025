@@ -5,6 +5,9 @@
   font-size: 1.1rem;
   margin-bottom: 24px;
 }
+.bold-author {
+  font-weight: bold;
+}
 .papers-list {
   display: flex;
   flex-direction: column;
@@ -38,6 +41,18 @@
   grid-template-columns: 1fr auto;
   gap: 16px;
   align-items: center;
+}
+@media (max-width: 768px) {
+  .author-container {
+    grid-template-columns: 1fr;     /* Switch to 1 column */
+    grid-template-rows: auto auto;  /* Authors on top, note below */
+    text-align: left;               /* Keeps alignment clean */
+  }
+
+  /* Small spacing adjustment */
+  .contrib-note {
+    margin-top: 4px;
+  }
 }
 
 .contrib-note {
