@@ -54,5 +54,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  closeSidebar() {this.navbarService.closeSidebar();}
+  closeSidebar(tab: string) {
+    // Close the sidebar
+    this.navbarService.closeSidebar();
+    // Navigate to the new tab
+    this.navbarService.navigateTab(tab);
+  }
 }

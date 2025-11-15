@@ -9,13 +9,15 @@ interface Paper {
   authors: {
     name: string;
     url: string;
-    contribution: 'equal' | '';
+    asterisk: boolean;
+    embolden: boolean;
   }[];
   journal: string;
   year: number;
   abstract: string;
   link?: string;
   doi?: string;
+  asterisk_note?: string;
 }
 
 @Component({
@@ -36,33 +38,39 @@ export class PapersComponent {
         "Implicit Surfaces via Neural Network Verification",
       authors: [
         {
-          name: 'Jorge Chavez',
-          url: 'https://www.jorgechavezuiuc.com/',
-          contribution: 'equal',
-        },
-        {
           name: 'Ruize Gao',
           url: 'https://www.linkedin.com/in/ruize-gao-199b0b18b/',
-          contribution: 'equal',
+          asterisk: true,
+          embolden: false,
+        },
+        {
+          name: 'Jorge Chavez',
+          url: 'https://www.jorgechavezuiuc.com/',
+          asterisk: true,
+          embolden: true,
         },
         {
           name: 'Xiangru Zhong',
           url: 'https://scholar.google.com/citations?user=ltuTQBIAAAAJ&hl=zh-CN',
-          contribution: 'equal',
+          asterisk: true,
+          embolden: false,
         },
         {
           name: 'Huan Zhang',
           url: 'https://www.huan-zhang.com/',
-          contribution: '',
+          asterisk: false,
+          embolden: false,
         },
         {
           name: 'Shenlong Wang',
           url: 'https://shenlong.web.illinois.edu/',
-          contribution: '',
+          asterisk: false,
+          embolden: false,
         }
       ],
+      asterisk_note: "* Authors contributed equally",
       journal: "International Conference on Learning Representations (ICLR) [Under Review]",
-      year: 2025,
+      year: 2026,
       abstract: "Geometric queries on neural implicit surfaces can be converted to neural verification " +
         "problems that seek to prove certain properties of the queried neural implicit. State-" +
         "of-the-art neural verification tools are capable of providing refined solutions to such " +
@@ -87,53 +95,59 @@ export class PapersComponent {
       title: "Clip-and-Verify: Linear Constraint-Driven Domain Clipping for Accelerating Neural Network Verification",
       authors: [
         {
-          name: 'Jorge Chavez',
-          url: 'https://www.jorgechavezuiuc.com/',
-          contribution: 'equal',
-        },
-        {
           name: 'Duo Zhou',
           url: 'https://www.duo-zhou.com/',
-          contribution: 'equal',
+          asterisk: true,
+          embolden: false,
+        },
+        {
+          name: 'Jorge Chavez',
+          url: 'https://www.jorgechavezuiuc.com/',
+          asterisk: true,
+          embolden: true,
         },
         {
           name: 'Hesun Chen',
           url: 'https://www.linkedin.com/in/hesun-chen-495b7633b',
-          contribution: 'equal',
+          asterisk: false,
+          embolden: false,
         },
         {
           name: 'Huan Zhang',
           url: 'https://www.huan-zhang.com/',
-          contribution: '',
+          asterisk: false,
+          embolden: false,
         },
         {
           name: 'Grani Adiwena Hanasusanto',
           url: 'http://grani.hanasusanto.com/',
-          contribution: '',
+          asterisk: false,
+          embolden: false,
         },
       ],
-      journal: "Conference on Neural Information Processing Systems (NeurIPS) [Under Review]",
+      asterisk_note: "* Co-first Author",
+      journal: "Conference on Neural Information Processing Systems (NeurIPS) [Accepted 🎉🎉]",
       year: 2025,
-      abstract: "State-of-the-art neural network verifiers demonstrate that applying the branch-and-" +
-        "bound (BaB) procedure with fast bounding techniques plays a key role in tackling " +
-        "many challenging verification properties. In this work, we introduce the linear " +
-        "constraint-driven clipping framework, a class of scalable and efficient methods " +
-        "to enhance bound propagation verifiers. Under this framework, we develop two " +
-        "novel algorithms that efficiently utilize linear constraints to 1) reduce portions of " +
-        "the input space that are either verified or irrelevant to a subproblem in the context " +
-        "of branch-and-bound, and 2) directly improve intermediate bounds throughout " +
-        "the network. The process novelly uses linear constraints that are readily available " +
-        "during verification but not fully utilized in prior work. It efficiently handles linear " +
-        "constraints using a specialized procedure that can scale to large neural networks " +
-        "that the latest verifiers can handle without using any expensive external solvers. " +
-        "Our verification algorithm, Clip-and-Verify, tightens bounds globally and can " +
-        "significantly reduce the number of subproblems handled during BaB. We show " +
-        "our clipping procedures can intuitively and efficiently be incorporated into BaB-" +
-        "based verifiers such as α,β-CROWN, and is amenable to BaB procedures that " +
-        "split upon the input or activation space. We demonstrate the effectiveness of our " +
-        "procedure on a broad range of benchmarks where, in some instances, we witness a " +
-        "96% reduction in the number of subproblems during branch-and-bound, and also " +
-        "achieve state-of-the-art verified accuracy across multiple benchmarks.",
+      abstract: "State-of-the-art neural network (NN) verifiers demonstrate that applying the branch-and-bound (BaB) procedure with fast bounding techniques plays a key role in " +
+        "tackling many challenging verification properties. In this work, we introduce the " +
+        "linear constraint-driven clipping framework, a class of scalable and efficient methods designed to enhance the efficacy of NN verifiers. Under this framework, we " +
+        "develop two novel algorithms that efficiently utilize linear constraints to 1) reduce " +
+        "portions of the input space that are either verified or irrelevant to a subproblem " +
+        "in the context of branch-and-bound, and 2) directly improve intermediate bounds " +
+        "throughout the network. The process novelly leverages linear constraints that often " +
+        "arise from bound propagation methods and is general enough to also incorporate " +
+        "constraints from other sources. It efficiently handles linear constraints using a " +
+        "specialized GPU procedure that can scale to large neural networks without the use " +
+        "of expensive external solvers. Our verification procedure, Clip-and-Verify, consistently tightens bounds across multiple benchmarks and can significantly reduce the " +
+        "number of subproblems handled during BaB. We show that our clipping algorithms " +
+        "can be integrated with BaB-based verifiers such as α,β-CROWN, utilizing either " +
+        "the split constraints in activation-space BaB or the output constraints that denote " +
+        "the unverified input space. We demonstrate the effectiveness of our procedure on " +
+        "a broad range of benchmarks where, in some instances, we witness a 96% reduction in the number of subproblems during branch-and-bound, and also achieve " +
+        "state-of-the-art verified accuracy across multiple benchmarks. Clip-and-Verify is " +
+        "part of the α,β-CROWN verifier, the VNN-COMP 2025 winner. Code available at " +
+        "'https://github.com/Verified-Intelligence/Clip_and_Verify'.",
+      link: 'https://openreview.net/pdf?id=HuSSR12Yot',
     },
     {
       title: "A Linear Constraint Driven Approach to Efficiently Enhancing Branch and Bound in Neural Network Verification",
@@ -141,7 +155,8 @@ export class PapersComponent {
         {
           name: 'Jorge Chavez',
           url: 'https://www.jorgechavezuiuc.com/',
-          contribution: '',
+          asterisk: false,
+          embolden: true,
         },
       ],
       journal: "Master’s Thesis, Graduate College of the University of Illinois Urbana-Champaign",
@@ -156,6 +171,7 @@ export class PapersComponent {
         "been made in neural network verification, we will delve further into the branch-and-bound paradigm that " +
         "typically accompanies many existing verifiers, as well as demonstrate an insightful algorithm that is capable " +
         "of garnering further efficacy from bound propagation verifiers.",
+      link: 'https://www.ideals.illinois.edu/items/136394',
     },
     // Add more papers as needed
   ];
@@ -194,12 +210,16 @@ export class PapersComponent {
   }
 
   /**
-   * Returns whether the equal contribution tag needs to be inserted for a paper.
+   * Returns the information to be placed into the footnote if one exists.
    * @param index -- Integer index into the list of papers.
+   * @return Either a string value of the footnote description or null if one does not exists.
    */
-  hasEqualContributors(index: number): boolean {
-    return this.papers[index].authors.some((author: {name: string, url: string, contribution: string}) => {
-      return author.contribution === 'equal';
-    });
+  getContributionNote(index: number): string | null {
+    if (this.papers[index].asterisk_note) {
+      return this.papers[index].asterisk_note;
+    }
+    else {
+      return null;
+    }
   }
 }

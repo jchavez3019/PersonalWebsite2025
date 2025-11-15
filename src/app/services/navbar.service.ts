@@ -16,7 +16,10 @@ export class NavbarService {
 
   // Valid tab options.
   tabOptions = new Set([
-    'home', 'projects', 'blog', 'papers',
+    'home',
+    'projects',
+    // 'blog', // FIXME: Bring this option back later.
+    'papers',
   ]);
 
   /**
