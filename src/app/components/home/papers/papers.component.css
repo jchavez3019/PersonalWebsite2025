@@ -42,7 +42,7 @@
   gap: 16px;
   align-items: center;
 }
-@media (max-width: 768px) {
+@media (orientation: portrait) {
   .author-container {
     grid-template-columns: 1fr;     /* Switch to 1 column */
     grid-template-rows: auto auto;  /* Authors on top, note below */

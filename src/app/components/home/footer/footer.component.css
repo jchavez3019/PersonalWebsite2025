@@ -21,7 +21,7 @@
 .social-link {
   color: white;
 }
-@media (max-width: 768px) {
+@media (orientation: portrait) {
   .footer-content {
     flex-direction: column;
     gap: 16px;

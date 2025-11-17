@@ -74,7 +74,7 @@ app-footer {
   margin-right: 16px;
 }
 
-@media (max-width: 768px) {
+@media (orientation: portrait) {
   .content {
     padding: 12px;
   }
@@ -243,7 +243,7 @@ app-footer {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (orientation: portrait) {
   .shape, .squiggly-line, .dot-group {
     transform: scale(0.7);
   }

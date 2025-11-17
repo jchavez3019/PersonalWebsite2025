@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -13,5 +14,5 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class FooterComponent {
   currentYear = new Date().getFullYear();
-  todaysDate = new Date();
+  masterLastUpdated = new Date(environment.masterLastUpdated);
 }
