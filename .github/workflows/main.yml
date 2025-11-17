@@ -26,6 +26,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Get the timestamp of the last Git commit from the project and
+      # save it as the environment variable, LAST_UPDATED. Store it in Github
+      # action's environment.
+      - name: Set LAST_UPDATED env variable from Git commit timestamp
+        run: echo "LAST_UPDATED=$(git log -1 --format=%cI)" >> $GITHUB_ENV
+
+      # Update the production environment file
+      # -i: Modify the file inplace.
+      # Substitution command has pattern: s/<pattern>/<replacement>/
+      # <pattern>: masterLastUpdated: '.*', ;; Finds a patter for this variable with single quotations
+      # <replacement>: masterLastUpdated: '${MASTER_LAST_UPDATED}', ;; replaces the contents with the env variable set
+      - name: Inject LAST_UPDATED into environment.prod.ts
+        run: |
+          sed -i "s/masterLastUpdated: '.*'/masterLastUpdated: '${MASTER_LAST_UPDATED}',/" src/environments/environment.prod.ts
+
       # Build Angular app
       - name: Build Angular App
         run: npm run build -- --configuration production
