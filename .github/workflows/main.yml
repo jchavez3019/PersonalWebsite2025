@@ -39,7 +39,7 @@ jobs:
       # <replacement>: masterLastUpdated: '${MASTER_LAST_UPDATED}', ;; replaces the contents with the env variable set
       - name: Inject LAST_UPDATED into environment.prod.ts
         run: |
-          sed -i "s/masterLastUpdated: '.*'/masterLastUpdated: '${MASTER_LAST_UPDATED}',/" src/environments/environment.prod.ts
+          sed -i "s/masterLastUpdated: '.*'/masterLastUpdated: '${MASTER_LAST_UPDATED}'/" src/environments/environment.prod.ts
 
       # Build Angular app
       - name: Build Angular App
