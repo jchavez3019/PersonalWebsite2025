@@ -1,0 +1,45 @@
+<div class="chat-container">
+  <header class="chat-header">
+    <h1>Toy Agentic Framework (v0)</h1>
+  </header>
+
+  <main class="chat-messages" #chatDisplay>
+    <div class="message system-message">
+      <div class="message-bubble">
+        Hello! I'm the Toy Agentic Framework. Ask me to perform a task.
+      </div>
+    </div>
+
+    <div class="message user-message">
+      <div class="message-bubble">
+        Run a task to summarize the state of the global economy.
+      </div>
+    </div>
+
+    <div class="message agent-message">
+      <div class="message-bubble">
+        **Task ID:** `1234-abcd-5678-efgh`
+        <br>
+        **Status:** `RUNNING`
+        <br>
+        Agent started work on your request. Use the status endpoint to check progress.
+      </div>
+    </div>
+  </main>
+
+  <footer class="chat-input-area">
+    <textarea
+      class="chat-textarea"
+      placeholder="Type your prompt here..."
+      rows="1"
+      [(ngModel)]="currentPrompt"
+      (keydown.enter)="sendMessage($event)"
+    ></textarea>
+    <button class="send-button" (click)="sendMessage()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 2L11 13"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+      </svg>
+    </button>
+  </footer>
+</div>

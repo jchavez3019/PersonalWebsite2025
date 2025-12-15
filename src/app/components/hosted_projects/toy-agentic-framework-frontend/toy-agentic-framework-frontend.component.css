@@ -1,0 +1,131 @@
+/* Container for the entire chat window */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh; /* Set a fixed height for the chat window */
+  max-width: 800px; /* Keep it centered and readable */
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  overflow: hidden; /* Important for containing the scrollable area */
+}
+
+/* Header */
+.chat-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+/* Message Display Area */
+.chat-messages {
+  flex-grow: 1; /* Takes up all available space */
+  overflow-y: auto; /* Enables vertical scrolling */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between messages */
+}
+
+/* Base message container */
+.message {
+  display: flex;
+}
+
+/* Message bubble styling */
+.message-bubble {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 80%; /* Limit bubble width */
+  word-wrap: break-word; /* Ensure text wraps */
+  line-height: 1.4;
+}
+
+/* Styling for USER messages (right-aligned, blue) */
+.user-message {
+  justify-content: flex-end; /* Align to the right */
+}
+
+.user-message .message-bubble {
+  background-color: #007bff; /* Primary color */
+  color: white;
+  border-bottom-right-radius: 5px; /* Sharp corner on the edge */
+}
+
+/* Styling for AGENT and SYSTEM messages (left-aligned, gray/light blue) */
+.agent-message, .system-message {
+  justify-content: flex-start; /* Align to the left */
+}
+
+.agent-message .message-bubble {
+  background-color: #e9ecef; /* Light gray for responses */
+  color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+.system-message .message-bubble {
+  background-color: #d1ecf1; /* Light blue for system notifications */
+  color: #0c5460;
+  border-bottom-left-radius: 5px;
+  font-style: italic;
+}
+
+
+/* Input Area */
+.chat-input-area {
+  display: flex;
+  border-top: 1px solid #eee;
+  padding: 10px 15px;
+  background-color: #f8f8f8;
+}
+
+.chat-textarea {
+  flex-grow: 1; /* Takes most of the input space */
+  resize: none; /* Disable manual resizing */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+  margin-right: 10px;
+  transition: border-color 0.2s;
+  overflow-y: hidden; /* Prevents scrollbar unless necessary */
+}
+
+.chat-textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Send Button */
+.send-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%; /* Circular button */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}
+
+.send-button svg {
+  width: 20px;
+  height: 20px;
+}
