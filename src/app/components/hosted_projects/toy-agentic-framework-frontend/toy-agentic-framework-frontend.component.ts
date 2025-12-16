@@ -163,7 +163,7 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy, OnInit {
   ngOnInit() {
     if (DEBUG_PARSER) {
       console.log(`DEBUG_PARSER is set to ${DEBUG_PARSER}. This helps us debug the parser.`);
-      let debugMsg: ChatMessage = {
+      const debugMsg: ChatMessage = {
         type: 'agent',
         content: DEBUG_CONTENT,
         sources: DEBUG_SOURCES,

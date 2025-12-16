@@ -12,6 +12,8 @@ import {OptionList} from 'mathjax-full/js/util/Options.js';
 import {DOCUMENT} from '@angular/common';
 import {defaultMacros} from './mathjax.macros';
 import {LiteElement} from 'mathjax-full/js/adaptors/lite/Element';
+import { LiteText } from 'mathjax-full/js/adaptors/lite/Text';
+import { LiteDocument } from 'mathjax-full/js/adaptors/lite/Document';
 
 
 export interface MathJaxConfig {
@@ -37,9 +39,9 @@ export interface AdditionalTexOptions {
 export class MathJaxService {
 
   private adaptor: ReturnType<typeof liteAdaptor> | null = null; // DOM adaptor used by MathJax in Node environments to manipulate HTML and compute styles
-  private inputJax: TeX<any, any, any> | null = null; // Configured TeX input processor
-  private outputJax: CHTML<any, any, any> | null = null; // Configured CHTML output processor
-  private mathDocument: MathDocument<any, any, any> | null = null; // holds global configuration
+  private inputJax: TeX<LiteElement, LiteText, LiteDocument> | null = null; // Configured TeX input processor
+  private outputJax: CHTML<LiteElement, LiteText, LiteDocument> | null = null; // Configured CHTML output processor
+  private mathDocument: MathDocument<LiteElement, LiteText, LiteDocument> | null = null; // holds global configuration
   private isInitialized = false; // whether the service has been initialized
   private currentSection = 1; // TODO: May remove later
   private mathJaxStyleElement: HTMLStyleElement | null = null;
@@ -105,9 +107,9 @@ export class MathJaxService {
    * This ensures clean state between document renders
    * @param inputConfig
    */
-  private resetMathJaxState(inputConfig?: AdditionalTexOptions): TeX<any, any, any> {
+  private resetMathJaxState(inputConfig?: AdditionalTexOptions): TeX<LiteElement, LiteText, LiteDocument> {
     // Create fresh input processor with clean state
-    let inputJax: TeX<any, any, any>;
+    let inputJax: TeX<LiteElement, LiteText, LiteDocument>;
 
     if (inputConfig) {
       // We were given additional input configuration values to use
@@ -178,10 +180,10 @@ export class MathJaxService {
         packages: renderConfig['packages'] ?? [],
         macros: renderConfig['macros'] ?? {},
       } : undefined;
-      const inputJax: TeX<any, any, any> = this.resetMathJaxState(renderConfigSubset);
+      const inputJax: TeX<LiteElement, LiteText, LiteDocument> = this.resetMathJaxState(renderConfigSubset);
 
       // Create a new document with the fresh input processor
-      const doc: MathDocument<any, any, any> = mathjax.document(htmlContent, {
+      const doc: MathDocument<LiteElement, LiteText, LiteDocument> = mathjax.document(htmlContent, {
         InputJax: inputJax,
         OutputJax: this.outputJax,
       });
