@@ -1,18 +1,23 @@
 // toy-agentic-framework-frontend.component.ts
-import {Component, ElementRef, inject, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {MatIcon} from '@angular/material/icon';
 import {catchError, interval, Observable, of, Subscription, switchMap, takeWhile} from 'rxjs';
 import {AgentApiService, SearchResultObject} from '../../../services/api/toy-agentic-framework-api.services';
 import { TaskStatusResponse } from '../../../services/api/toy-agentic-framework-api.services';
+import { RenderLLMResponsePipe } from '../../../services/mathjax/markdown.pipe';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 // Define a simple structure for a message
 interface ChatMessage {
   type: 'user' | 'agent' | 'system';
   content: string;
+  renderedContent?: SafeHtml; // The final, rendered HTML
   sources?: SearchResultObject[];
 }
+
+const DEBUG_PARSER = true;
 
 @Component({
   selector: 'app-toy-agentic-framework-frontend',
@@ -20,7 +25,7 @@ interface ChatMessage {
   templateUrl: './toy-agentic-framework-frontend.component.html',
   styleUrl: './toy-agentic-framework-frontend.component.css'
 })
-export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
+export class ToyAgenticFrameworkFrontendComponent implements OnDestroy, OnInit {
   // Access the chat display area to enable auto-scrolling
   @ViewChild('chatDisplay') private chatDisplayRef!: ElementRef;
 
@@ -32,10 +37,94 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
 
   // API service to the backend for this project
   private readonly apiService: AgentApiService  = inject(AgentApiService);
+  private readonly sanitizer = inject(DomSanitizer);
+  private readonly renderPipe = inject(RenderLLMResponsePipe);
 
   messages: ChatMessage[] = [
     { type: 'system', content: "Hello! I'm the Toy Agentic Framework. Ask me to perform a task (e.g., 'Summarize the global economy')." }
   ];
+
+  ngOnInit() {
+    if (DEBUG_PARSER) {
+      console.log(`DEBUG_PARSER is set to ${DEBUG_PARSER}. This helps us debug the parser.`);
+      const debugMsg: ChatMessage = {
+        type: 'agent',
+        content: "Certainly! Here are some key equations for commonly used loss functions in machine learning, including cross-entropy loss, mean squared error (MSE), Kullback-Leibler (KL) divergence, and the variational autoencoder (VAE) loss.\n" +
+          "\n" +
+          "---\n" +
+          "\n" +
+          "### 1. Cross-Entropy Loss\n" +
+          "\n" +
+          "For a classification problem with true label \\( y \\) and predicted probability \\( \\hat{y} \\):\n" +
+          "\n" +
+          "\\[\n" +
+          "\\mathcal{L}_{\\text{CE}} = -\\sum_{i} y_i \\log(\\hat{y}_i)\n" +
+          "\\]\n" +
+          "\n" +
+          "- For binary classification:\n" +
+          "\\[\n" +
+          "\\mathcal{L}_{\\text{BCE}} = - [y \\log(\\hat{y}) + (1 - y) \\log(1 - \\hat{y})]\n" +
+          "\\]\n" +
+          "[Source 3]\n" +
+          "\n" +
+          "---\n" +
+          "\n" +
+          "### 2. Mean Squared Error (MSE) Loss\n" +
+          "\n" +
+          "Used mainly in regression tasks:\n" +
+          "\n" +
+          "\\[\n" +
+          "\\mathcal{L}_{\\text{MSE}} = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2\n" +
+          "\\]\n" +
+          "\n" +
+          "Where:\n" +
+          "- \\( y_i \\) = true value,\n" +
+          "- \\( \\hat{y}_i \\) = predicted value,\n" +
+          "- \\( n \\) = number of samples.\n" +
+          "[Source 3]\n" +
+          "\n" +
+          "---\n" +
+          "\n" +
+          "### 3. Kullback-Leibler (KL) Divergence\n" +
+          "\n" +
+          "Given two (discrete) probability distributions \\( P \\) (true) and \\( Q \\) (approximate):\n" +
+          "\n" +
+          "\\[\n" +
+          "D_{\\text{KL}}(P \\| Q) = \\sum_{i} P(i) \\log \\frac{P(i)}{Q(i)}\n" +
+          "\\]\n" +
+          "[Source 4]\n" +
+          "\n" +
+          "---\n" +
+          "\n" +
+          "### 4. Variational Autoencoder (VAE) Loss\n" +
+          "\n" +
+          "The VAE loss combines a reconstruction term (often cross-entropy or MSE) and a KL-divergence term:\n" +
+          "\n" +
+          "\\[\n" +
+          "\\mathcal{L}_{\\text{VAE}} = \\mathbb{E}_{q(z|x)} [ -\\log p(x|z)] + D_{\\text{KL}}(q(z|x) \\| p(z))\n" +
+          "\\]\n" +
+          "\n" +
+          "Where:\n" +
+          "- The first term is the reconstruction loss,\n" +
+          "- The second term is the KL divergence between the approximate posterior \\( q(z|x) \\) and the prior \\( p(z) \\).\n" +
+          "[Source 1], [Source 2]\n" +
+          "\n" +
+          "---\n" +
+          "\n" +
+          "#### References\n" +
+          "- [Source 1]: Clear derivation of the VAE KL loss: https://medium.com/@jpark7/finally-a-clear-derivation-of-the-vae-kl-loss-4cb38d2e47b3\n" +
+          "- [Source 2]: Weighting KL vs. reconstruction loss in VAEs: https://stats.stackexchange.com/questions/332179/how-to-weight-kld-loss-vs-reconstruction-loss-in-variational-auto-encoder\n" +
+          "- [Source 3]: Common loss functions (Cross-Entropy, MSE): https://arxiv.org/html/2504.04242v1\n" +
+          "- [Source 4]: KL-divergence formula: https://www.reddit.com/r/MachineLearning/comments/fftpfh/d_in_what_situation_would_one_rather_use/\n" +
+          "\n" +
+          "Would you like to see detailed explanations or derivations for any of these equations?",
+        sources: []
+      };
+      this.processMessage(debugMsg).then(() => {
+        this.messages.push(debugMsg);
+      });
+    }
+  }
 
   ngOnDestroy() {
     if (this.pollingSubscription) {
@@ -113,7 +202,7 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
         )
       )
       .subscribe({
-        next: (response: TaskStatusResponse | null) => {
+        next: async (response: TaskStatusResponse | null) => {
           if (!response) {
             // Null response means an HTTP error occurred, logging is done in catchError, just ignore here
             return;
@@ -125,18 +214,33 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
             // get the final response from the LLM (or use a default response if the server failed)
             const finalResult: string = response.final_response || "Task completed successfully, but no result was returned.";
             // display this result
-            this.messages.push({
+            const agentMsg: ChatMessage = {
               type: 'agent',
-              content: `**Task Complete!**\n\n${finalResult}`,
-            });
+              content: finalResult,
+              sources: response.search_results
+            };
+            await this.processMessage(agentMsg);
+            this.messages.push(agentMsg);
+            // this.messages.push({
+            //   type: 'agent',
+            //   content: `**Task Complete!**\n\n${finalResult}`,
+            // });
             if (response.search_results && response.search_results.length > 0) {
               // the response also had a non-empty list of search results, let's display these as well in the chat
               const sourceContent = this.formatSourcesMessage(response.search_results);
-              this.messages.push({
+              const sourceMsg: ChatMessage = {
                 type: 'agent',
                 content: sourceContent,
-                sources: response.search_results // Store for future use if needed
-              });
+                sources: response.search_results
+              };
+              // Render it once
+              await this.processMessage(sourceMsg);
+              this.messages.push(sourceMsg);
+              // this.messages.push({
+              //   type: 'agent',
+              //   content: sourceContent,
+              //   sources: response.search_results // Store for future use if needed
+              // });
             }
 
             this.stopTask();
@@ -208,6 +312,25 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
     }).join('<br><br>');
 
     return header + listItems;
+  }
+
+    // Helper to extract just the URLs from the message's sources
+    getSourceLinks(message: ChatMessage): string[] {
+      return message.sources ? message.sources.map(s => s.link) : [];
+    }
+
+    getCurrentUrl(): string {
+      return window.location.href;
+    }
+  private async processMessage(msg: ChatMessage): Promise<void> {
+    const sourceLinks = msg.sources ? msg.sources.map(s => s.link) : [];
+    console.log(`Passing raw content string to parser: \n${msg.content}`);
+    msg.renderedContent = await this.renderPipe.transform(
+      msg.content,
+      sourceLinks,
+      window.location.href
+    );
+    console.log(`Rendered content: \n${msg.renderedContent}`);
   }
 
   private scrollToBottom(): void {
