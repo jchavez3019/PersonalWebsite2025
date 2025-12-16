@@ -59,7 +59,8 @@ export class ProjectsComponent {
       image: 'assets/ai_agent_cartoon.png',
       technologies: ['LangGraph', 'MongoDB', 'Redis', 'Celery'],
       github: 'https://github.com/jchavez3019/ToyAgenticFramework',
-      router_link: '/toy-agentic-framework-v0'
+      router_link: '/toy-agentic-framework-v0',
+      pdf: './assets/project_pdfs/ToyAgenticFramework.pdf',
     },
     {
       title: 'ECE 484: Principles of Safe Autonomy Lane Tracking',
