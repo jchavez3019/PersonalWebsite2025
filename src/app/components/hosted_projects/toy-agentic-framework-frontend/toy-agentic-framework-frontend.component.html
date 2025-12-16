@@ -1,0 +1,44 @@
+<div class="chat-container">
+  <header class="chat-header">
+    <h1>Toy Agentic Framework (v0)</h1>
+  </header>
+
+  <main class="chat-messages" #chatDisplay>
+
+    <div class="message"
+         *ngFor="let message of messages"
+         [ngClass]="{
+         'user-message': message.type === 'user',
+         'agent-message': message.type === 'agent',
+         'system-message': message.type === 'system'
+       }"
+    >
+      <div class="message-bubble" [innerHTML]="message.content">
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="chat-input-area">
+    <textarea
+      class="chat-textarea"
+      placeholder="{{isTaskRunning ? 'Agent is working on your request...' : 'Type your prompt here...'}}"
+      rows="1"
+      [(ngModel)]="currentPrompt"
+      (keydown.enter)="sendMessage($event)"
+      [disabled]="isTaskRunning"
+    ></textarea>
+    <button class="send-button"
+            (click)="sendMessage()"
+            [disabled]="isTaskRunning"
+    >
+<!--      FIXME: Let's possibly use if-else logic instead of two if statements -->
+      <ng-container *ngIf="!isTaskRunning">
+        <mat-icon>send</mat-icon>
+      </ng-container>
+      <ng-container *ngIf="isTaskRunning">
+        <mat-icon class="loading-spinner" *ngIf="isTaskRunning">cached</mat-icon>
+      </ng-container>
+    </button>
+  </footer>
+</div>

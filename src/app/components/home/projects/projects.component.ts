@@ -13,6 +13,7 @@ interface Project {
   image: string;
   technologies: string[];
   link?: string;
+  router_link?: string;
   video?: string;
   pdf?: string;
   github?: string;
@@ -52,6 +53,14 @@ export class ProjectsComponent {
     //   link: 'https://project-two.example.com',
     //   github: 'https://github.com/yourusername/project-two'
     // },
+    {
+      title: 'Toy Agentic Framework',
+      description: 'This is a complete framework for interacting with an agentic framework (written in LangGraph and supported with Docker Compose, Redis, and Celery, and hosted using AWS EC2). The front-end is implemented right here!',
+      image: 'assets/ai_agent_cartoon.png',
+      technologies: ['LangGraph', 'MongoDB', 'Redis', 'Celery'],
+      github: 'https://github.com/jchavez3019/ToyAgenticFramework',
+      router_link: '/toy-agentic-framework-v0'
+    },
     {
       title: 'ECE 484: Principles of Safe Autonomy Lane Tracking',
       description: 'A complete vision-based solution for autonomous lane tracking. This project combined computer vision and control system techniques with an implementation deployed on the campus GEM vehicle.',

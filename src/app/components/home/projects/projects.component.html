@@ -28,6 +28,9 @@
         <a class="project-pdf" mat-button color="primary" [routerLink]="['/pdf-viewer', project.pdf]" routerLinkActive="active" *ngIf="project.pdf">
           <mat-icon>picture_as_pdf</mat-icon> View Report
         </a>
+        <a class="project-router-link" mat-button color="primary" [routerLink]="[project.router_link]" routerLinkActive="active" *ngIf="project.router_link">
+          <mat-icon>terminal</mat-icon> Try Here!
+        </a>
         <a class="project-github" mat-button color="accent" [href]="project.github" target="_blank" *ngIf="project.github">
           <mat-icon>code</mat-icon> View Code
         </a>

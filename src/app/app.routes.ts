@@ -2,6 +2,9 @@
 import { Routes } from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {PdfViewerComponent} from './components/pdf-viewer/pdf-viewer.component';
+import {
+  ToyAgenticFrameworkFrontendComponent
+} from './components/hosted_projects/toy-agentic-framework-frontend/toy-agentic-framework-frontend.component';
 // import {BlogEntryComponent} from './components/blog/blog-entry/blog-entry.component';
 
 /*
@@ -21,5 +24,6 @@ export const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   // // { path: 'blog/entry', component: BlogEntryComponent },
   { path: 'pdf-viewer/:filename', component: PdfViewerComponent },
+  { path: 'toy-agentic-framework-v0', component: ToyAgenticFrameworkFrontendComponent},
   {path: '**', redirectTo: ''},
 ];
