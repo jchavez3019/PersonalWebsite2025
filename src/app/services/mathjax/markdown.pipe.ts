@@ -12,7 +12,7 @@ export class RenderLLMResponsePipe implements PipeTransform {
   private md = new MarkdownIt({
     html: true, // convert to html
     linkify: true, // turns links into refs that can be clicked
-    typographer: false // prevents processing backslashes
+    typographer: true
   });
   private sanitizer = inject(DomSanitizer);
   private mathJaxService = inject(MathJaxService);
