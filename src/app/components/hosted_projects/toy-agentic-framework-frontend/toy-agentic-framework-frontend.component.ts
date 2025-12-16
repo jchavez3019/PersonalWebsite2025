@@ -201,7 +201,7 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
    * Helper method to format the sources bubble content
    */
   private formatSourcesMessage(results: SearchResultObject[]): string {
-    let header = `This prompt led the agentic framework to search for additional results online. Here are the ${results.length} references used in the above response:<br><br>`;
+    const header = `This prompt led the agentic framework to search for additional results online. Here are the ${results.length} references used in the above response:<br><br>`;
 
     const listItems = results.map((result, index) => {
       return `**[Source ${index + 1}]** <a href="${result.link}" target="_blank">${result.title}</a><br>_ ${result.snippet}_`;
