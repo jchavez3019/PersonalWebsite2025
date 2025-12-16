@@ -34,11 +34,9 @@ export class AgentApiService {
    */
   startTask(prompt: string): Observable<TaskStartResponse> {
     const body = { task: prompt };
-    let post_url: string = `${this.API_URL}/v1/agent/execute/`
-    let ret = this.http.post<TaskStartResponse>(post_url, body);
-    console.log(`Just sent a post request to the URL ${post_url}`)
-    console.log(ret);
-    return ret;
+    const post_url = `${this.API_URL}/v1/agent/execute/`;
+    console.log(`Sending a POST request to the URL ${post_url}`);
+    return this.http.post<TaskStartResponse>(post_url, body);
   }
 
   /**
@@ -50,12 +48,10 @@ export class AgentApiService {
     // add a parameters field to customize the GET request
     let params = new HttpParams();
     params = params.append('task_id', taskId);
-    let get_url = `${this.API_URL}/v1/agent/status/`;
-    let ret =  this.http.get<TaskStatusResponse>(get_url, {
+    const get_url = `${this.API_URL}/v1/agent/status/`;
+    console.log(`Sending GET request to the URL ${get_url}`);
+    return this.http.get<TaskStatusResponse>(get_url, {
       params: params
     });
-    console.log(`Just sent a post request to the URL ${get_url}`)
-    console.log(ret);
-    return ret
   }
 }
