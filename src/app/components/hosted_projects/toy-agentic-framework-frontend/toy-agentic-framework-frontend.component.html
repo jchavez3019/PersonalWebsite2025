@@ -10,7 +10,8 @@
          [ngClass]="{
          'user-message': message.type === 'user',
          'agent-message': message.type === 'agent',
-         'system-message': message.type === 'system'
+         'system-message': message.type === 'system',
+         'source-bubble': message.sources && message.sources.length > 0
        }"
     >
       <div class="message-bubble" [innerHTML]="message.content">

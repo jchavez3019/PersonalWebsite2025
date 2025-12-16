@@ -79,6 +79,24 @@
   font-style: italic;
 }
 
+/* Styling for the source bubble to make it look like a sub-response */
+.source-bubble .message-bubble {
+  background-color: #f8f9fa; /* Slightly different shade than standard agent bubble */
+  border-left: 4px solid #007bff; /* Accent color to indicate "Reference" */
+  font-size: 0.9em;
+  color: #555;
+}
+
+.source-bubble a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.source-bubble a:hover {
+  text-decoration: underline;
+}
+
 
 /* Input Area */
 .chat-input-area {
