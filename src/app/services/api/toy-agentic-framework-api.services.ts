@@ -11,10 +11,17 @@ export interface TaskStartResponse {
   message: string;
 }
 
+export interface SearchResultObject {
+  title: string;
+  link: string;
+  snippet: string;
+}
+
 export interface TaskStatusResponse {
   task_id: string;
   status: 'In Progress' | 'Completed' | 'Failed';
-  final_response?: string; // Only present when status is 'Completed'
+  final_response?: string; // Only present when status is
+  search_results: SearchResultObject[];
 }
 
 @Injectable({

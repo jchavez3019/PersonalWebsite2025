@@ -4,13 +4,14 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {MatIcon} from '@angular/material/icon';
 import {catchError, interval, Observable, of, Subscription, switchMap, takeWhile} from 'rxjs';
-import {AgentApiService} from '../../../services/api/toy-agentic-framework-api.services';
+import {AgentApiService, SearchResultObject} from '../../../services/api/toy-agentic-framework-api.services';
 import { TaskStatusResponse } from '../../../services/api/toy-agentic-framework-api.services';
 
 // Define a simple structure for a message
 interface ChatMessage {
   type: 'user' | 'agent' | 'system';
   content: string;
+  sources?: SearchResultObject[];
 }
 
 @Component({
@@ -120,11 +121,30 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
 
           // Check if the task is finished
           if (response.status === 'Completed') {
+
+            // get the final response from the LLM (or use a default response if the server failed)
             const finalResult: string = response.final_response || "Task completed successfully, but no result was returned.";
-            this.messages.push({ type: 'agent', content: `**Task Complete!**\n\n${finalResult}` });
+            // display this result
+            this.messages.push({
+              type: 'agent',
+              content: `**Task Complete!**\n\n${finalResult}`,
+            });
+            if (response.search_results && response.search_results.length > 0) {
+              // the response also had a non-empty list of search results, let's display these as well in the chat
+              const sourceContent = this.formatSourcesMessage(response.search_results);
+              this.messages.push({
+                type: 'agent',
+                content: sourceContent,
+                sources: response.search_results // Store for future use if needed
+              });
+            }
+
             this.stopTask();
           } else if (response.status === 'Failed') {
-            this.messages.push({ type: 'system', content: `Task FAILED. Task ID: ${taskId}` });
+            this.messages.push({
+              type: 'system',
+              content: `Task FAILED. Task ID: ${taskId}`
+            });
             this.stopTask();
           }
         },
@@ -136,7 +156,10 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
         },
         error: (err) => {
           // This block handles errors that stop the entire polling stream (e.g., critical error in initial interval setup)
-          this.messages.push({ type: 'system', content: `Critical polling error: ${err.message}` });
+          this.messages.push({
+            type: 'system',
+            content: `Critical polling error: ${err.message}`
+          });
           this.stopTask();
         }
       });
@@ -172,6 +195,19 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
       // 3. Start the API process
       this.startAgentTask(trimmedPrompt);
     }
+  }
+
+  /**
+   * Helper method to format the sources bubble content
+   */
+  private formatSourcesMessage(results: SearchResultObject[]): string {
+    let header = `This prompt led the agentic framework to search for additional results online. Here are the ${results.length} references used in the above response:<br><br>`;
+
+    const listItems = results.map((result, index) => {
+      return `**[Source ${index + 1}]** <a href="${result.link}" target="_blank">${result.title}</a><br>_ ${result.snippet}_`;
+    }).join('<br><br>');
+
+    return header + listItems;
   }
 
   private scrollToBottom(): void {
