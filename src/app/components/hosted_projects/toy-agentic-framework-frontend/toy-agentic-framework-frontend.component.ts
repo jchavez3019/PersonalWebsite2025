@@ -23,8 +23,8 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
   // Access the chat display area to enable auto-scrolling
   @ViewChild('chatDisplay') private chatDisplayRef!: ElementRef;
 
-  currentPrompt: string = '';
-  isTaskRunning: boolean = false;
+  currentPrompt = '';
+  isTaskRunning = false;
   pollingSubscription: Subscription | null = null;
   // TODO: Perhaps in the future, I will add WebSocket support. For now, naively poll the server.
   private POLLING_INTERVAL = 200;
@@ -35,8 +35,6 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
   messages: ChatMessage[] = [
     { type: 'system', content: "Hello! I'm the Toy Agentic Framework. Ask me to perform a task (e.g., 'Summarize the global economy')." }
   ];
-
-  constructor() { }
 
   ngOnDestroy() {
     if (this.pollingSubscription) {
@@ -124,10 +122,10 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
           if (response.status === 'Completed') {
             const finalResult: string = response.final_response || "Task completed successfully, but no result was returned.";
             this.messages.push({ type: 'agent', content: `**Task Complete!**\n\n${finalResult}` });
-            this.stopTask(taskId);
+            this.stopTask();
           } else if (response.status === 'Failed') {
             this.messages.push({ type: 'system', content: `Task FAILED. Task ID: ${taskId}` });
-            this.stopTask(taskId);
+            this.stopTask();
           }
         },
         complete: () => {
@@ -139,12 +137,12 @@ export class ToyAgenticFrameworkFrontendComponent implements OnDestroy {
         error: (err) => {
           // This block handles errors that stop the entire polling stream (e.g., critical error in initial interval setup)
           this.messages.push({ type: 'system', content: `Critical polling error: ${err.message}` });
-          this.stopTask(taskId);
+          this.stopTask();
         }
       });
   }
 
-  private stopTask(taskId: string): void {
+  private stopTask(): void {
     if (this.pollingSubscription) {
       this.pollingSubscription.unsubscribe();
     }
