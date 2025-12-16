@@ -87,6 +87,12 @@
   padding: 10px 15px;
   background-color: #f8f8f8;
 }
+/* Disable the whole input area when a task is running */
+.chat-input-area .chat-textarea[disabled] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  color: #6c757d;
+}
 
 .chat-textarea {
   flex-grow: 1; /* Takes most of the input space */
@@ -121,11 +127,25 @@
   flex-shrink: 0;
 }
 
+/* Visually disable the send button when a task is running */
+.chat-input-area .send-button[disabled] {
+  background-color: #a0c9f8; /* A lighter, deactivated blue */
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
 .send-button:hover {
   background-color: #0056b3;
 }
 
-.send-button svg {
-  width: 20px;
-  height: 20px;
+/* Spin Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  /* Ensure the spinner color is visible against the button background */
+  color: white !important;
 }

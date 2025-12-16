@@ -4,42 +4,41 @@
   </header>
 
   <main class="chat-messages" #chatDisplay>
-    <div class="message system-message">
-      <div class="message-bubble">
-        Hello! I'm the Toy Agentic Framework. Ask me to perform a task.
+
+    <div class="message"
+         *ngFor="let message of messages"
+         [ngClass]="{
+         'user-message': message.type === 'user',
+         'agent-message': message.type === 'agent',
+         'system-message': message.type === 'system'
+       }"
+    >
+      <div class="message-bubble" [innerHTML]="message.content">
       </div>
     </div>
 
-    <div class="message user-message">
-      <div class="message-bubble">
-        Run a task to summarize the state of the global economy.
-      </div>
-    </div>
-
-    <div class="message agent-message">
-      <div class="message-bubble">
-        **Task ID:** `1234-abcd-5678-efgh`
-        <br>
-        **Status:** `RUNNING`
-        <br>
-        Agent started work on your request. Use the status endpoint to check progress.
-      </div>
-    </div>
   </main>
 
   <footer class="chat-input-area">
     <textarea
       class="chat-textarea"
-      placeholder="Type your prompt here..."
+      placeholder="{{isTaskRunning ? 'Agent is working on your request...' : 'Type your prompt here...'}}"
       rows="1"
       [(ngModel)]="currentPrompt"
       (keydown.enter)="sendMessage($event)"
+      [disabled]="isTaskRunning"
     ></textarea>
-    <button class="send-button" (click)="sendMessage()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 2L11 13"/>
-        <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
-      </svg>
+    <button class="send-button"
+            (click)="sendMessage()"
+            [disabled]="isTaskRunning"
+    >
+<!--      FIXME: Let's possibly use if-else logic instead of two if statements -->
+      <ng-container *ngIf="!isTaskRunning">
+        <mat-icon>send</mat-icon>
+      </ng-container>
+      <ng-container *ngIf="isTaskRunning">
+        <mat-icon class="loading-spinner" *ngIf="isTaskRunning">cached</mat-icon>
+      </ng-container>
     </button>
   </footer>
 </div>
