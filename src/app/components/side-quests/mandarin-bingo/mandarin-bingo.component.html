@@ -1,0 +1,196 @@
+<div class="bingo-page">
+  <div class="bingo-header bingo-no-print">
+    <a mat-button routerLink="/" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      Home
+    </a>
+    <h1>Mandarin Character Bingo</h1>
+    <p class="intro">
+      Build a printable 5×5 board with traditional characters. Drag or select a word, then tap an empty cell.
+      Use Active labels and Exclude to control which words fill the board.
+    </p>
+  </div>
+
+  <div class="bingo-layout">
+    <section class="vocab-panel bingo-no-print" aria-label="Vocabulary list">
+      <div class="vocab-header">
+        <h2>Vocabulary</h2>
+        <div class="vocab-header-controls">
+          <span class="eligible-count" aria-label="Eligible over total">
+            {{ eligibleCount }}/{{ totalCount }}
+          </span>
+          <button mat-stroked-button type="button" [matMenuTriggerFor]="sortMenu">
+            Sort
+            <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #sortMenu="matMenu">
+            <button mat-menu-item type="button" (click)="setSort('created', 'desc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('created', 'desc')">check</mat-icon>
+              <span>Created (newest)</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('created', 'asc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('created', 'asc')">check</mat-icon>
+              <span>Created (oldest)</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('modified', 'desc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('modified', 'desc')">check</mat-icon>
+              <span>Modified (newest)</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('modified', 'asc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('modified', 'asc')">check</mat-icon>
+              <span>Modified (oldest)</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('pinyin', 'asc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('pinyin', 'asc')">check</mat-icon>
+              <span>Pinyin A–Z</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('pinyin', 'desc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('pinyin', 'desc')">check</mat-icon>
+              <span>Pinyin Z–A</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('english', 'asc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('english', 'asc')">check</mat-icon>
+              <span>English A–Z</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('english', 'desc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('english', 'desc')">check</mat-icon>
+              <span>English Z–A</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('label', 'asc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('label', 'asc')">check</mat-icon>
+              <span>Label A–Z</span>
+            </button>
+            <button mat-menu-item type="button" (click)="setSort('label', 'desc')">
+              <mat-icon [class.sort-check-hidden]="!isSortSelected('label', 'desc')">check</mat-icon>
+              <span>Label Z–A</span>
+            </button>
+          </mat-menu>
+          <button mat-stroked-button type="button" (click)="openActiveLabelsDialog()">
+            Active labels
+          </button>
+        </div>
+      </div>
+
+      <div class="add-row">
+        <button mat-flat-button color="primary" type="button" (click)="openAddDialog()">
+          Add custom
+        </button>
+      </div>
+
+      <ul class="vocab-list">
+        @for (entry of sortedEntries; track trackEntryById($index, entry)) {
+          <li
+            class="vocab-row"
+            [class.ineligible]="!entryIsEligible(entry)"
+            [class.placed]="isPlacedOnBoard(entry.id) && entryIsEligible(entry)"
+            [class.selected]="selectedEntryId === entry.id"
+            [attr.draggable]="entryIsEligible(entry)"
+            tabindex="0"
+            role="button"
+            (dragstart)="onVocabDragStart($event, entry)"
+            (dragend)="onDragEnd()"
+            (click)="selectEntry(entry)"
+            (keydown.enter)="selectEntry(entry)"
+            (keydown.space)="$event.preventDefault(); selectEntry(entry)"
+          >
+            <span class="hanzi">{{ entry.character }}</span>
+            <span class="pinyin">{{ entry.pinyin }}</span>
+            <span class="translation">{{ entry.translation }}</span>
+            <span class="source-tag">{{ entry.source === 'preset' ? 'Preset' : 'Custom' }}</span>
+            <span class="label-tag">{{ displayLabel(entry.label) }}</span>
+            <span class="action-slot">
+              @if (entry.source === 'custom') {
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Edit custom entry"
+                  (click)="openEditDialog(entry, $event)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              }
+            </span>
+            <span class="action-slot">
+              @if (entry.source === 'custom') {
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Delete custom entry"
+                  (click)="deleteCustom(entry, $event)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </span>
+            <span class="exclude-slot">
+              <mat-checkbox
+                [checked]="excludeCheckboxChecked(entry)"
+                [disabled]="excludeCheckboxDisabled(entry)"
+                (change)="setExcluded(entry, $event.checked)"
+                (click)="$event.stopPropagation(); onExcludeSlotClick(entry)"
+              >
+                Exclude
+              </mat-checkbox>
+            </span>
+          </li>
+        }
+      </ul>
+
+      <button mat-stroked-button type="button" color="warn" (click)="requestResetToPreset()">
+        Reset to preset
+      </button>
+    </section>
+
+    <section class="board-panel" aria-label="Bingo board">
+      <div class="board-actions bingo-no-print">
+        <button mat-flat-button color="primary" type="button" (click)="fillEmptyCells()">
+          Fill empty cells
+        </button>
+        <button mat-stroked-button type="button" (click)="clearBoard()">Clear board</button>
+        <button
+          mat-stroked-button
+          type="button"
+          [disabled]="!hasCharacterCells()"
+          (click)="printBoard()"
+        >
+          Print
+        </button>
+        <mat-slide-toggle [(ngModel)]="showPinyinOnBoard" name="showPinyin">
+          Show pinyin on board
+        </mat-slide-toggle>
+      </div>
+
+      <div class="bingo-board" role="grid">
+        @for (cell of board; track $index) {
+          <div
+            class="bingo-cell"
+            [class.free]="cell.kind === 'free'"
+            [class.empty]="cell.kind === 'empty'"
+            [class.filled]="cell.kind === 'character'"
+            [class.selected]="selectedBoardIndex === $index"
+            [class.fading]="isFading($index)"
+            role="gridcell"
+            [attr.draggable]="cell.kind === 'character'"
+            [attr.tabindex]="cell.kind === 'empty' || cell.kind === 'character' ? 0 : -1"
+            (click)="onCellClick($index)"
+            (keydown.enter)="onCellClick($index)"
+            (keydown.space)="$event.preventDefault(); onCellClick($index)"
+            (dragstart)="onBoardDragStart($event, $index)"
+            (dragend)="onDragEnd()"
+            (dragover)="onCellDragOver($event)"
+            (drop)="onCellDrop($event, $index)"
+          >
+            @if (cell.kind === 'free') {
+              <span class="free-label">{{ freeLabel }}</span>
+            } @else if (cell.kind === 'character') {
+              <span class="cell-hanzi">{{ cell.entry.character }}</span>
+              @if (showPinyinOnBoard) {
+                <span class="cell-pinyin">{{ cell.entry.pinyin }}</span>
+              }
+            }
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+.entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: min(100%, 320px);
+  padding-top: 8px;
+}
+
+.cancel-btn {
+  color: #ffffff;
+}
+
+.save-btn {
+  background: #90caf9;
+  color: #0d47a1;
+}

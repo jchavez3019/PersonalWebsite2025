@@ -5,6 +5,7 @@ import {PdfViewerComponent} from './components/pdf-viewer/pdf-viewer.component';
 import {
   ToyAgenticFrameworkFrontendComponent
 } from './components/hosted_projects/toy-agentic-framework-frontend/toy-agentic-framework-frontend.component';
+import {MandarinBingoComponent} from './components/side-quests/mandarin-bingo/mandarin-bingo.component';
 // import {BlogEntryComponent} from './components/blog/blog-entry/blog-entry.component';
 
 /*
@@ -25,5 +26,6 @@ export const routes: Routes = [
   // // { path: 'blog/entry', component: BlogEntryComponent },
   { path: 'pdf-viewer/:filename', component: PdfViewerComponent },
   { path: 'toy-agentic-framework-v0', component: ToyAgenticFrameworkFrontendComponent},
+  { path: 'side-quests/mandarin-bingo', component: MandarinBingoComponent },
   {path: '**', redirectTo: ''},
 ];

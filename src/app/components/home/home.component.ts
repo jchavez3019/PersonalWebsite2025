@@ -11,6 +11,7 @@ import {HomeContentComponent} from './home-content/home-content.component';
 import {distinctUntilChanged} from 'rxjs';
 import {ProjectsComponent} from './projects/projects.component';
 import {PapersComponent} from './papers/papers.component';
+import {SideQuestsComponent} from './side-quests/side-quests.component';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ import {PapersComponent} from './papers/papers.component';
     HomeContentComponent,
     ProjectsComponent,
     PapersComponent,
+    SideQuestsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

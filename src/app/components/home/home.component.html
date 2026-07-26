@@ -27,6 +27,10 @@
             <mat-icon>article</mat-icon>
             <span>Papers</span>
           </a>
+          <a mat-button routerLink="/side-quests" routerLinkActive="active" (click)="closeSidebar('side-quests')">
+            <mat-icon>explore</mat-icon>
+            <span>Side Quests</span>
+          </a>
         </div>
       </mat-drawer>
 
@@ -83,6 +87,7 @@
         <app-home-content *ngSwitchCase="'home'"></app-home-content>
         <app-projects *ngSwitchCase="'projects'"></app-projects>
         <app-papers *ngSwitchCase="'papers'"></app-papers>
+        <app-side-quests *ngSwitchCase="'side-quests'"></app-side-quests>
       </main>
     </mat-drawer-container>
     <app-footer></app-footer>
