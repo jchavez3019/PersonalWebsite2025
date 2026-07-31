@@ -1,0 +1,36 @@
+<div class="side-quests-container">
+  <h1>Side Quests</h1>
+  <p class="intro">
+    Playful one-offs outside the main portfolio—small ideas worth sharing.
+  </p>
+
+  <ul class="quest-list">
+    @for (quest of sortedQuests; track quest.id) {
+      <li class="quest-row">
+        <img
+          class="quest-preview"
+          [src]="quest.previewImage"
+          [alt]="quest.title"
+          width="88"
+          height="88"
+        />
+        <div class="quest-body">
+          <h2 class="quest-title">{{ quest.title }}</h2>
+          <p class="quest-description">{{ quest.description }}</p>
+          <p class="quest-date">
+            Created {{ quest.createdAt | date: 'MMMM d, y' }}
+          </p>
+        </div>
+        <a
+          mat-flat-button
+          color="primary"
+          class="quest-open"
+          [routerLink]="quest.router_link"
+        >
+          <mat-icon>play_arrow</mat-icon>
+          Open
+        </a>
+      </li>
+    }
+  </ul>
+</div>

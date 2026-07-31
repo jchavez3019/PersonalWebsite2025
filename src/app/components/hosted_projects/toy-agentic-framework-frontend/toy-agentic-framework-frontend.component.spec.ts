@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ToyAgenticFrameworkFrontendComponent } from './toy-agentic-framework-frontend.component';
 
@@ -8,7 +9,8 @@ describe('ToyAgenticFrameworkFrontendComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToyAgenticFrameworkFrontendComponent]
+      imports: [ToyAgenticFrameworkFrontendComponent],
+      providers: [provideHttpClient()],
     })
     .compileComponents();
 

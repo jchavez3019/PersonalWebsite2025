@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Active labels</h2>
+
+<mat-dialog-content>
+  <p class="hint">
+    Only words whose label is active can be placed or used in random fills.
+    Drag pills between zones, or click an inactive pill to activate it.
+  </p>
+
+  <div
+    class="pill-zone active-zone"
+    (dragover)="onZoneDragOver($event)"
+    (drop)="onActiveZoneDrop($event)"
+  >
+    <span class="zone-label">Active</span>
+    <div class="pill-row">
+      @for (label of activePills; track label) {
+        <div
+          class="label-pill active"
+          draggable="true"
+          (dragstart)="onPillDragStart($event, label)"
+        >
+          <span class="pill-text">{{ displayLabel(label) }}</span>
+          <button
+            type="button"
+            class="pill-remove"
+            aria-label="Deactivate label"
+            (click)="deactivate(label, $event)"
+          >
+            ×
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="zone-divider" role="separator"></div>
+
+  <div
+    class="pill-zone inactive-zone"
+    (dragover)="onZoneDragOver($event)"
+    (drop)="onInactiveZoneDrop($event)"
+  >
+    <span class="zone-label">Inactive</span>
+    <div class="pill-row">
+      @for (label of inactivePills; track label) {
+        <button
+          type="button"
+          class="label-pill inactive"
+          draggable="true"
+          (dragstart)="onPillDragStart($event, label)"
+          (click)="activate(label)"
+        >
+          <span class="pill-text">{{ displayLabel(label) }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+  <button mat-flat-button type="button" class="apply-btn" (click)="apply()">Apply</button>
+</mat-dialog-actions>

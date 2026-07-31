@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "fixture-1",
+      "character": "這",
+      "pinyin": "zhè",
+      "translation": "this",
+      "source": "preset",
+      "label": "Lesson 5",
+      "excludedByUser": false,
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "modifiedAt": "2026-01-01T00:00:00.000Z"
+    }
+  ]
+}

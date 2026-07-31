@@ -1,0 +1,263 @@
+.bingo-page {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  color: #f5f5f7;
+}
+
+.bingo-header h1 {
+  margin: 8px 0 8px;
+  font-size: 1.75rem;
+}
+
+.intro {
+  opacity: 0.85;
+  max-width: 42rem;
+  line-height: 1.5;
+}
+
+.back-link {
+  margin-left: -8px;
+}
+
+.bingo-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.15fr) minmax(280px, 1fr);
+  gap: 28px;
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .bingo-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vocab-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.vocab-header h2 {
+  margin: 0;
+}
+
+.vocab-header-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.eligible-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  opacity: 0.9;
+  min-width: 3.5rem;
+}
+
+.add-row {
+  margin-bottom: 12px;
+}
+
+.vocab-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  max-height: 480px;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+}
+
+.vocab-row {
+  display: grid;
+  grid-template-columns:
+    minmax(2.5rem, auto)
+    minmax(4rem, 1fr)
+    minmax(5rem, 1.4fr)
+    4.5rem
+    minmax(4rem, 0.9fr)
+    2.5rem
+    2.5rem
+    auto;
+  gap: 6px 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.vocab-row:last-child {
+  border-bottom: none;
+}
+
+.vocab-row.selected {
+  outline: 2px solid rgba(129, 140, 248, 0.9);
+  outline-offset: -2px;
+}
+
+.vocab-row.ineligible {
+  opacity: 0.55;
+}
+
+.vocab-row.placed {
+  color: #a7f3d0;
+}
+
+.vocab-row.placed .source-tag,
+.vocab-row.placed .label-tag {
+  color: inherit;
+}
+
+.hanzi {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.pinyin {
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.translation {
+  opacity: 0.75;
+  font-size: 0.85rem;
+}
+
+.source-tag,
+.label-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  justify-self: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.action-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.exclude-slot {
+  justify-self: end;
+}
+
+.board-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.bingo-board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  background: #111827;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.bingo-cell {
+  aspect-ratio: 1;
+  background: #1f2937;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  min-height: 64px;
+  transition: opacity 0.2s ease;
+}
+
+.bingo-cell.empty,
+.bingo-cell.filled {
+  cursor: pointer;
+}
+
+.bingo-cell.selected {
+  outline: 2px solid rgba(147, 197, 253, 0.95);
+  outline-offset: -2px;
+}
+
+.bingo-cell.fading {
+  opacity: 0;
+}
+
+.bingo-cell.free {
+  background: #374151;
+}
+
+.free-label {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.cell-hanzi {
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.cell-pinyin {
+  font-size: clamp(0.65rem, 1.4vw, 0.85rem);
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+@media print {
+  .bingo-no-print {
+    display: none !important;
+  }
+
+  .bingo-page {
+    max-width: none;
+    padding: 0;
+    color: #000;
+  }
+
+  .bingo-layout {
+    display: block;
+  }
+
+  .bingo-board {
+    background: #fff;
+    border-color: #000;
+    gap: 0;
+    padding: 0;
+  }
+
+  .bingo-cell {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+    min-height: 18mm;
+    break-inside: avoid;
+  }
+
+  .cell-hanzi,
+  .cell-pinyin,
+  .free-label {
+    color: #000;
+  }
+}

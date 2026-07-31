@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content>
+  <form class="entry-form" [formGroup]="form" (ngSubmit)="save()">
+    <mat-form-field appearance="outline">
+      <mat-label>Character</mat-label>
+      <input matInput formControlName="character" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pinyin</mat-label>
+      <input matInput formControlName="pinyin" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>English</mat-label>
+      <input matInput formControlName="translation" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Label (optional)</mat-label>
+      <input
+        matInput
+        formControlName="label"
+        [matAutocomplete]="labelAuto"
+        autocomplete="off"
+      />
+      <mat-autocomplete #labelAuto="matAutocomplete">
+        @for (option of filteredLabels$ | async; track option) {
+          <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-autocomplete>
+      @if (labelError) {
+        <mat-error>{{ labelError }}</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+  <button mat-flat-button type="button" class="save-btn" (click)="save()">Save</button>
+</mat-dialog-actions>

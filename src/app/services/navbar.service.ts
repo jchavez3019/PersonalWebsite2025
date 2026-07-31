@@ -20,6 +20,7 @@ export class NavbarService {
     'projects',
     // 'blog', // FIXME: Bring this option back later.
     'papers',
+    'side-quests',
   ]);
 
   /**
